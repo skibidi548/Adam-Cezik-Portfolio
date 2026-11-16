@@ -1,281 +1,637 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap');
+
 :root {
-    --bg-main: #090d16;
-    --bg-card: #131b2e;
-    --bg-nav: rgba(9, 13, 22, 0.85);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-blue: #00d2ff;
-    --accent-purple: #7928ca;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-base: #060911;
+    --bg-surface: #0d1322;
+    --bg-surface-hover: #131c31;
+    --bg-glass: rgba(13, 19, 34, 0.78);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-primary: #00d2ff;
+    --accent-secondary: #7928ca;
+    --accent-glow: rgba(0, 210, 255, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(0, 210, 255, 0.35);
+    --flap-bg: #080c16;
+    --flap-top: #0c1220;
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
 }
 
-* {
+[data-theme="light"] {
+    --bg-base: #f4f7fb;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f8fafc;
+    --bg-glass: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent-primary: #0284c7;
+    --accent-secondary: #6d28d9;
+    --accent-glow: rgba(2, 132, 199, 0.18);
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-accent: rgba(2, 132, 199, 0.35);
+    --flap-bg: #1e293b;
+    --flap-top: #0f172a;
+    --shadow-card: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-    background-color: var(--bg-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-base);
     background-image: 
-        radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.06), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(121, 40, 202, 0.08), transparent 25%);
-    color: var(--text-primary);
-    line-height: 1.7;
+        radial-gradient(circle at 15% 15%, rgba(0, 210, 255, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(121, 40, 202, 0.07) 0%, transparent 40%);
+    color: var(--text-main);
+    line-height: 1.65;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* === NAVIGACE === */
-header {
-    background-color: var(--bg-nav);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+/* ==========================================================
+   NAVIGACE
+   ========================================================== */
+.site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-nav {
-    max-width: 1100px;
+.nav-container {
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 1rem 5%;
+    padding: 0.9rem 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: space-between;
 }
 
-.logo {
-    font-size: 1.4rem;
+.brand-logo {
+    font-size: 1.3rem;
     font-weight: 800;
-    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    color: var(--text-main);
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
-.logo span {
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+.brand-logo span {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.nav-links {
-    list-style: none;
+.nav-controls {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.92rem;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: all 0.25s ease;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-.nav-links a:hover {
-    color: var(--text-primary);
-    background-color: rgba(255, 255, 255, 0.05);
+.nav-btn:hover {
+    color: var(--text-main);
+    background: rgba(128, 128, 128, 0.08);
 }
 
-.nav-links a.active {
-    color: #fff;
-    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), rgba(121, 40, 202, 0.15));
-    border: 1px solid rgba(0, 210, 255, 0.3);
+.nav-btn.active {
+    color: var(--text-main);
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.12), rgba(121, 40, 202, 0.12));
+    border-color: var(--border-accent);
+    font-weight: 600;
 }
 
-/* === HLAVNÍ OBSAH === */
-main {
-    max-width: 1050px;
-    width: 90%;
-    margin: 3.5rem auto;
+.icon-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.05rem;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-1px);
+}
+
+.burger-btn {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.burger-btn span {
+    width: 18px;
+    height: 2px;
+    background: var(--text-main);
+    border-radius: 2px;
+    transition: 0.25s ease;
+}
+
+/* ==========================================================
+   HLAVNÍ OBSAH A TYPOGRAFIE
+   ========================================================== */
+.main-wrapper {
+    max-width: 1040px;
+    width: 100%;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
     flex: 1;
 }
 
-/* === ÚVODNÍ SEKCE S FOTKOU === */
-.hero-container {
-    display: flex;
+.tab-panel {
+    display: none;
+    animation: panelSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes panelSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.page-title span {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================
+   HERO SEKCE
+   ========================================================== */
+.hero-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
     align-items: center;
-    justify-content: space-between;
-    gap: 3.5rem;
     margin-bottom: 2.5rem;
 }
 
-.hero-text {
-    flex: 1;
-}
-
-.badge {
-    display: inline-block;
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.95rem;
+    border-radius: 99px;
     background: rgba(0, 210, 255, 0.1);
-    color: var(--accent-blue);
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 0.3rem 0.9rem;
-    border-radius: 20px;
+    border: 1px solid var(--border-accent);
+    color: var(--accent-primary);
     font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1.2;
     margin-bottom: 1.2rem;
 }
 
-h1 span {
-    background: linear-gradient(90deg, var(--accent-blue), #3a7bd5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 8px var(--accent-primary);
 }
 
-.hero-photo-wrapper {
+.hero-desc {
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    max-width: 580px;
+    margin-bottom: 1.8rem;
+}
+
+.avatar-frame {
     position: relative;
-    width: 270px;
-    height: 320px;
-    flex-shrink: 0;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 15px 35px var(--accent-glow);
 }
 
-.hero-photo-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    z-index: 0;
-    opacity: 0.8;
-    filter: blur(8px);
-}
-
-.hero-photo {
-    position: relative;
-    z-index: 1;
+.avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
-    border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    background-color: var(--bg-card);
+    border-radius: 50%;
+    display: block;
+    background: var(--bg-surface);
 }
 
-/* === KARTY A TEXTY === */
+/* ==========================================================
+   KARTY A BENTO GRID
+   ========================================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
 .card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 2.2rem;
-    margin-bottom: 1.8rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    margin-bottom: 1.5rem;
 }
 
-h2 {
-    font-size: 1.6rem;
-    color: #fff;
-    margin-bottom: 1rem;
+.bento-grid .card {
+    margin-bottom: 0;
+}
+
+.card:hover {
+    border-color: var(--border-accent);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 }
 
-h2::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 22px;
-    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
-    border-radius: 2px;
+.card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
 }
 
-p {
-    color: var(--text-secondary);
-    font-size: 1.08rem;
-    margin-bottom: 1.2rem;
-}
-
-p:last-child {
+.card p:last-child {
     margin-bottom: 0;
 }
 
-/* === ODKAZY A TLAČÍTKA === */
-.svitici-odkaz {
-    color: var(--accent-blue);
-    text-decoration: none;
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 1.4rem;
+}
+
+.tag {
+    font-size: 0.8rem;
     font-weight: 600;
-    border-bottom: 1px dashed var(--accent-blue);
-    transition: 0.2s;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(128, 128, 128, 0.1);
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
 }
 
-.svitici-odkaz:hover {
-    color: #fff;
-    border-bottom-style: solid;
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
-}
-
-.btn {
-    display: inline-block;
-    background: linear-gradient(90deg, var(--accent-blue), #2563eb);
-    color: #fff;
-    padding: 0.8rem 1.6rem;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 1rem;
-    margin-right: 0.8rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid rgba(0, 210, 255, 0.4);
-}
-
-.btn-outline:hover {
-    background: rgba(0, 210, 255, 0.1);
-}
-
-/* === OBRÁZEK SKRIPTU === */
-.nahled-hry {
+.code-preview {
     width: 100%;
-    max-width: 500px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
     margin: 1.2rem 0;
     display: block;
 }
 
-/* === PATIČKA === */
-footer {
-    text-align: center;
-    padding: 1.8rem;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+/* ==========================================================
+   TLAČÍTKA
+   ========================================================== */
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
 }
 
-@media (max-width: 768px) {
-    .hero-container {
-        flex-direction: column-reverse;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #ffffff;
+    box-shadow: 0 8px 20px -6px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-accent);
+    background: rgba(128, 128, 128, 0.06);
+}
+
+/* ==========================================================
+   SKUTEČNÝ NÁDRAŽNÍ SPLIT-FLAP COUNTDOWN
+   ========================================================== */
+.flap-board {
+    background: linear-gradient(160deg, rgba(13, 19, 34, 0.95), rgba(6, 9, 17, 0.98));
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem;
+    margin: 1.8rem 0;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.flap-board-header {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-primary);
+    margin-bottom: 1.5rem;
+}
+
+.flap-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flap-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.flap-card {
+    position: relative;
+    width: 96px;
+    height: 104px;
+    background: var(--flap-bg);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    perspective: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Horní polovina klapky */
+.flap-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--flap-top);
+    border-bottom: 2px solid #000000;
+    z-index: 1;
+}
+
+/* Boční panty sklapky */
+.flap-card::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 4px);
+    left: 0;
+    right: 0;
+    height: 8px;
+    border-left: 4px solid #1e293b;
+    border-right: 4px solid #1e293b;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.flap-number {
+    position: relative;
+    z-index: 2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Animace mechanického sklopení horní klapky */
+.flap-card.tick .flap-number {
+    animation: mechanicalFlip 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flap-card.tick .flap-sheen {
+    animation: sheenSweep 0.45s ease-out;
+}
+
+.flap-sheen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes mechanicalFlip {
+    0% {
+        transform: rotateX(-75deg) scaleY(0.85);
+        filter: brightness(0.5);
+    }
+    55% {
+        transform: rotateX(12deg) scaleY(1.03);
+        filter: brightness(1.25);
+    }
+    100% {
+        transform: rotateX(0deg) scaleY(1);
+        filter: brightness(1);
+    }
+}
+
+@keyframes sheenSweep {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.flap-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+}
+
+.flap-colon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+    opacity: 0.45;
+    margin-bottom: 1.6rem;
+}
+
+/* ==========================================================
+   PATIČKA
+   ========================================================== */
+.site-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* ==========================================================
+   RESPONZIVITA (TABLETY A MOBILNÍ TELEFONY)
+   ========================================================== */
+@media (max-width: 860px) {
+    .burger-btn {
+        display: inline-flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-subtle);
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        gap: 0.4rem;
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: left;
+        padding: 0.75rem 1rem;
+    }
+
+    .hero-box {
+        grid-template-columns: 1fr;
         text-align: center;
-        gap: 2rem;
+        gap: 1.5rem;
     }
-    h1 {
-        font-size: 2.3rem;
+
+    .avatar-frame {
+        margin: 0 auto;
+        width: 170px;
+        height: 170px;
+        order: -1;
     }
-    .hero-photo-wrapper {
-        width: 220px;
-        height: 260px;
+
+    .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-wrapper {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .card {
+        padding: 1.4rem;
+    }
+
+    .btn-row {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    /* Countdown na mobilu v čisté 2x2 mřížce */
+    .flap-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .flap-colon {
+        display: none;
+    }
+
+    .flap-card {
+        width: 100%;
+        height: 88px;
+    }
+
+    .flap-number {
+        font-size: 2.2rem;
     }
 }
