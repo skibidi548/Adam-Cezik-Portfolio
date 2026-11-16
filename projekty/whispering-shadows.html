@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whispering Shadows | Detail projektu</title>
+    <!-- CSS se natahuje o složku výše -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* ==========================================================
+           STYLY PRO INFORMACE O PROJEKTU (NOVĚ PŘIDANÉ)
+           ========================================================== */
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .meta-box {
+            background: rgba(9, 13, 22, 0.7);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .project-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .project-section h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            background: rgba(19, 27, 46, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .feature-list strong {
+            color: #00d2ff;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .roadmap-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .roadmap-list li {
+            background: rgba(9, 13, 22, 0.5);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border-left: 3px solid rgba(0, 210, 255, 0.4);
+        }
+
+        .roadmap-list li.done {
+            border-left-color: #00e676;
+            opacity: 0.85;
+        }
+
+        .roadmap-list li.active {
+            border-left-color: #00d2ff;
+            background: rgba(0, 210, 255, 0.08);
+            font-weight: 600;
+        }
+
+        /* ==========================================================
+           NÁDRAŽNÍ TABULE (SPLIT-FLAP EFFECT S PŘESNOU ANIMACÍ)
+           ========================================================== */
+        .countdown-wrapper {
+            background: linear-gradient(135deg, rgba(19, 27, 46, 0.9), rgba(9, 13, 22, 0.95));
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            border-radius: 20px;
+            padding: 2.2rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown-title {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+
+        .countdown-card {
+            background: #090d16;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            min-width: 90px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .countdown-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 5;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .countdown-card.flashing::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: lightFlash 0.35s ease-out;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        @keyframes lightFlash {
+            0% { transform: translateY(-100%) rotate(30deg); }
+            100% { transform: translateY(100%) rotate(30deg); }
+        }
+
+        .countdown-value {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.1;
+            display: inline-block;
+        }
+
+        .flap-animation {
+            animation: flipFlap 0.35s ease-in-out;
+        }
+
+        @keyframes flipFlap {
+            0% {
+                transform: rotateX(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: rotateX(-90deg) scale(0.95);
+                opacity: 0.2;
+            }
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        .countdown-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0.6rem;
+            font-weight: 600;
+        }
+
+        .countdown-separator {
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(0, 210, 255, 0.4);
+            margin-top: -1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HORNÍ NAVIGACE -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">Adam<span>Čežík</span></a>
+            <ul class="nav-links">
+                <li><a href="../projekty.html">← Zpět na seznam projektů</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HLAVNÍ OBSAH STRÁNKY -->
+    <main>
+        <h1>Whispering <span>Shadows</span></h1>
+
+        <div class="card">
+            <h2>O projektu</h2>
+            <p>
+                <strong>Whispering Shadows</strong> je atmosférická hororová a mysteriózní hra na platformě Roblox, kde ticho není nikdy úplné a každý stín může skrývat tajemství. Ocitneš se v temném prostředí, ve kterém musíš prozkoumávat okolí, řešit hádanky, odhalit příběh místa a hlavně – přežít.
+            </p>
+            <p style="margin-top: 0.8rem;">
+                Hru vyvíjím samostatně v <strong>Roblox Studiu</strong> s důrazem na hustou atmosféru, realistické nasvícení, prostorový zvuk a plynulý chod i na slabších zařízeních.
+            </p>
+
+            <!-- RYCHLÝ PŘEHLED (KARTIČKY) -->
+            <div class="project-meta">
+                <div class="meta-box">
+                    <div class="meta-label">Žánr</div>
+                    <div class="meta-value">Horor / Mysteriózní</div>
+                </div>
+                <div class="meta-box">
+                    <div class="meta-label">Platforma</div>
+                    <div class="meta-value">Roblox (V beta verzi pouze PC)</div>
+                </div>
+                <div class="meta-box">
+                    <div class="meta-label">Technologie</div>
+                    <div class="meta-value">Roblox Studio / Luau</div>
+                </div>
+                <div class="meta-box">
+                    <div class="meta-label">Stav projektu</div>
+                    <div class="meta-value" style="color: #00d2ff;">Ve vývoji (Pre-Alpha)</div>
+                </div>
+            </div>
+            
+            <!-- ==========================================
+                 NÁDRAŽNÍ ODPOČÍTÁVÁNÍ (SPLIT-FLAP)
+                 ========================================== -->
+            <div class="countdown-wrapper">
+                <div class="countdown-title">
+                    <span>🚉</span> Odpočet do vydání beta verze
+                </div>
+                
+                <div class="countdown-grid" id="countdown">
+                    <div class="countdown-card" id="card-days">
+                        <div class="countdown-value" id="days">--</div>
+                        <div class="countdown-text">Dní</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-card" id="card-hours">
+                        <div class="countdown-value" id="hours">--</div>
+                        <div class="countdown-text">Hodin</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-card" id="card-minutes">
+                        <div class="countdown-value" id="minutes">--</div>
+                        <div class="countdown-text">Minut</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-card" id="card-seconds">
+                        <div class="countdown-value" id="seconds">--</div>
+                        <div class="countdown-text">Vteřin</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONEC SEKCE COUNTDOWN -->
+
+            <!-- HLAVNÍ PRVKY HRY -->
+            <div class="project-section">
+                <h3>Co ve hře najdeš</h3>
+                <ul class="feature-list">
+                    <li>
+                        <strong>🌑 Temná atmosféra</strong>
+                        Dynamické osvětlení, mlha a detailní prostředí navržené tak, aby tě okamžitě vtáhlo do děje.
+                    </li>
+                    <li>
+                        <strong>🎧 Propracovaný zvuk</strong>
+                        Prostorové efekty, šepot a napínavý zvukový podkres – doporučeno hrát se sluchátky.
+                    </li>
+                    <li>
+                        <strong>🧩 Průzkum a hádanky</strong>
+                        Hledání stop, klíčů a řešení logických úkolů, které ti otevřou cestu dál.
+                    </li>
+                    <li>
+                        <strong>⚡ Optimalizace na prvním místě</strong>
+                        Vlastní skripty v jazyce Luau a optimalizované modely pro stabilní FPS bez sekání.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- AKTUÁLNÍ STAV VÝVOJE -->
+            <div class="project-section">
+                <h3>Průběh vývoje</h3>
+                <ul class="roadmap-list">
+                    <li class="done">✅ Základní koncept, příběh a návrh mapy</li>
+                    <li class="done">✅ Nasvícení prostředí a první verze lokací</li>
+                    <li class="active">🔄 Dovytváření modelů</li>
+                    <li class="active">🔄 Zlepšování grafiky a modelů</li>
+                    <li>⏳ Programování herních mechanik a interakcí v Luau (aktuálně)</li>
+                    <li>⏳ Dodávání závěrečných efektu a zvuků</li>
+                    <li>⏳ Zvukový design, optimalizace a uzavřené Beta testování</li>
+                    <li>⏳ Závěrečné testování </li>
+                    <li>⏳ Oficialní vydáni hry</li>
+                </ul>
+            </div>
+
+            <!-- UKÁZKA ZE HRY / SKRIPTU -->
+            <div class="project-section">
+                <h3>Náhled z vývoje</h3>
+                <img src="../img/script.png" alt="Ukázka vývoje Whispering Shadows" class="nahled-hry" style="margin-top: 0.5rem;">
+            </div>
+
+            <!-- TLAČÍTKA -->
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://www.roblox.com/games/84645137788989/Whispering-Shadows" target="_blank" class="btn">🎮 Otevřít hru na Robloxu</a>
+                <a href="https://www.roblox.com/communities/14502901/Cezans-Arcade-CZE#!/about" target="_blank" class="btn btn-outline">👥 Roblox Skupina</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- PATIČKA -->
+    <footer>
+        <p>&copy; 2026 Adam Čežík • Whispering Shadows</p>
+    </footer>
+
+    <!-- ==========================================================
+       JAVASCRIPT LOGIKA - ZKLAPKNUTÍ POUZE PŘI ZMĚNĚ KONKRÉTNÍ HODNOTY
+       ========================================================== -->
+    <script>
+        // 1. Nastav datum vydání (Rok, Měsíc, Den, Hodina, Minuta)
+        // Pozor: Leden = 0, Únor = 1 ... Červen = 5 ... Prosinec = 11
+        const targetDate = new Date(2027, 5, 8, 11 , 0, 0).getTime();
+
+        function updateFlapBox(id, cardId, newValue) {
+            const element = document.getElementById(id);
+            const cardElement = document.getElementById(cardId);
+            
+            if (element.innerText !== String(newValue)) {
+                element.innerText = newValue;
+                
+                element.classList.remove("flap-animation");
+                void element.offsetWidth;
+                element.classList.add("flap-animation");
+
+                cardElement.classList.remove("flashing");
+                void cardElement.offsetWidth;
+                cardElement.classList.add("flashing");
+            }
+        }
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<div style='color: var(--accent-blue); font-weight: bold; font-size: 1.3rem; padding: 1rem;'>🚀 Vydáno! Hra je oficiálně venku!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            updateFlapBox("days", "card-days", days);
+            updateFlapBox("hours", "card-hours", hours < 10 ? "0" + hours : hours);
+            updateFlapBox("minutes", "card-minutes", minutes < 10 ? "0" + minutes : minutes);
+            updateFlapBox("seconds", "card-seconds", seconds < 10 ? "0" + seconds : seconds);
+        }, 1000);
+    </script>
+
+</body>
+</html>

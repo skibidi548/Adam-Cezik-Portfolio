@@ -1,0 +1,281 @@
+:root {
+    --bg-main: #090d16;
+    --bg-card: #131b2e;
+    --bg-nav: rgba(9, 13, 22, 0.85);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-blue: #00d2ff;
+    --accent-purple: #7928ca;
+    --border-color: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.06), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(121, 40, 202, 0.08), transparent 25%);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === NAVIGACE === */
+header {
+    background-color: var(--bg-nav);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.logo span {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-links a.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), rgba(121, 40, 202, 0.15));
+    border: 1px solid rgba(0, 210, 255, 0.3);
+}
+
+/* === HLAVNÍ OBSAH === */
+main {
+    max-width: 1050px;
+    width: 90%;
+    margin: 3.5rem auto;
+    flex: 1;
+}
+
+/* === ÚVODNÍ SEKCE S FOTKOU === */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+}
+
+h1 span {
+    background: linear-gradient(90deg, var(--accent-blue), #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-photo-wrapper {
+    position: relative;
+    width: 270px;
+    height: 320px;
+    flex-shrink: 0;
+}
+
+.hero-photo-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    z-index: 0;
+    opacity: 0.8;
+    filter: blur(8px);
+}
+
+.hero-photo {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    background-color: var(--bg-card);
+}
+
+/* === KARTY A TEXTY === */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.2rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+h2::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 2px;
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+    margin-bottom: 1.2rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* === ODKAZY A TLAČÍTKA === */
+.svitici-odkaz {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed var(--accent-blue);
+    transition: 0.2s;
+}
+
+.svitici-odkaz:hover {
+    color: #fff;
+    border-bottom-style: solid;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--accent-blue), #2563eb);
+    color: #fff;
+    padding: 0.8rem 1.6rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-right: 0.8rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid rgba(0, 210, 255, 0.4);
+}
+
+.btn-outline:hover {
+    background: rgba(0, 210, 255, 0.1);
+}
+
+/* === OBRÁZEK SKRIPTU === */
+.nahled-hry {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin: 1.2rem 0;
+    display: block;
+}
+
+/* === PATIČKA === */
+footer {
+    text-align: center;
+    padding: 1.8rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+    }
+    h1 {
+        font-size: 2.3rem;
+    }
+    .hero-photo-wrapper {
+        width: 220px;
+        height: 260px;
+    }
+}

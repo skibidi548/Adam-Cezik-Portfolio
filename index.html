@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Čežík | Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ==========================================================
+           1. PŘEPÍNAČ REŽIMŮ (DARK / LIGHT MODE) - PROMĚNNÉ
+           ========================================================== */
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #131b2e;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-blue: #00d2ff;
+            --accent-purple: #7928ca;
+            --border-color: rgba(0, 210, 255, 0.2);
+            --header-bg: rgba(9, 13, 22, 0.85);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-blue: #0284c7;
+            --accent-purple: #7c3aed;
+            --border-color: rgba(2, 132, 199, 0.25);
+            --header-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        p, span, h2, h3 {
+            color: var(--text-primary);
+        }
+
+        /* Styly pro přepínání záložek na hlavní stránce */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+        
+        .nav-links button, .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+        .nav-links button:hover, .theme-toggle-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(125, 125, 125, 0.1);
+        }
+        .nav-links button.active {
+            color: var(--text-primary);
+            background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), rgba(121, 40, 202, 0.15));
+            border: 1px solid var(--border-color);
+        }
+
+        /* Tlačítko přepínače režimu */
+        .theme-toggle-btn {
+            font-size: 1.1rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border-color);
+            margin-left: 1rem;
+        }
+
+        /* ==========================================================
+           2. RESPONZIVITA A MOBILNÍ MENU (BURGER)
+           ========================================================== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-primary);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responzivní pravidla pro menší obrazovky / mobily */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                display: none;
+            }
+            .nav-links.active-menu {
+                display: flex;
+            }
+            .hero-container {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-photo-wrapper {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- HORNÍ MENU S PŘEPÍNACÍMI ZÁLOŽKAMI A NASTAVENÍM -->
+    <header>
+        <nav style="display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem;">
+            <a href="#" onclick="openTab(event, 'o-mne')" class="logo" style="font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text-primary);">Adam<span style="color: var(--accent-blue);">Čežík</span></a>
+            
+            <!-- Burger tlačítko pro mobily -->
+            <button class="menu-toggle" id="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div style="display: flex; align-items: center;">
+                <ul class="nav-links" id="nav-list" style="list-style: none; display: flex; gap: 0.5rem; align-items: center; margin: 0; padding: 0;">
+                    <li><button class="tab-btn active" onclick="openTab(event, 'o-mne')">O mně</button></li>
+                    <li><button class="tab-btn" onclick="openTab(event, 'Projekty')">Projekty</button></li>
+                    <li><button class="tab-btn" onclick="openTab(event, 'Roadmap')">Roadmap</button></li>
+                    <li><button class="tab-btn" onclick="openTab(event, 'Vybaveni')">Vybavení</button></li>
+                    <li><button class="tab-btn" onclick="openTab(event, 'co-umim')">Co umím</button></li>
+                    <li><button class="tab-btn" onclick="openTab(event, 'Kontakt')">Kontakt</button></li>
+                </ul>
+
+                <!-- Tlačítko pro přepínání Dark/Light režimu -->
+                <button class="theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()" title="Přepnout vzhled">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main style="max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem;">
+        <!-- 1. ZÁLOŽKA: O MNĚ -->
+        <div id="o-mne" class="tab-content active-tab">
+            <section class="hero-container" style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 2rem;">
+                <div class="hero-text" style="flex: 1;">
+                    <span class="badge" style="display: inline-block; background: rgba(0,210,255,0.1); color: var(--accent-blue); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">Student IT • SŠ EDUCHEM Most</span>
+                    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Ahoj, jsem <span style="color: var(--accent-blue);">Adam Čežík</span></h1>
+                    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">Nově jsem začal studovat na střední škole v Mostě. Na tuto školu jsem se rozhodl nastoupit, protože mě baví učit se programovat a porozumět novým věcem o počítači.</p>
+                    <button class="btn" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; padding: 0.7rem 1.5rem; border:none; border-radius: 10px; font-weight: 600; cursor:pointer;" onclick="openTab(event, 'projekty')">Moje projekty</button>
+                </div>
+
+                <div class="hero-photo-wrapper" style="flex-shrink: 0; text-align: center;">
+                    <img src="img/me.JPEG" alt="Adam Čežík" class="hero-photo" style="width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 3px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                </div>
+            </section>
+
+            <section class="card" style="padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 1rem;">Něco o mně & zájmy</h2>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Umím například vytvořit a nějak naprogramovat – tedy spíše ještě nezkušeně – vlastní hru v Roblox Studiu. Baví mě zkoušet nové věci a postupně zjišťovat, jak fungují skripty.</p>
+                <p style="color: var(--text-secondary); line-height: 1.6;">Ve volném čase nejraději sleduji Formuli 1, fotbal (především českou Chance Ligu) a hokej (Tipsport extraligu a Maxa ligu). Rád také sportuji a plánuji, že začnu pravidelně běhat. Předtím, než jsem nastoupil na střední školu, jsem hrál fotbal za FK Tatran Kadaň, ale kvůli dojíždění a intru jsem s tím musel skončit.</p>
+            </section>
+        </div>
+
+        <!-- 2. ZÁLOŽKA: PROJEKTY -->
+        <div id="Projekty" class="tab-content">
+            <h1 style="margin-bottom: 1.5rem;">Moje <span>Projekty</span></h1>
+            
+            <div class="card" style="padding: 2rem; border-radius: 16px;">
+                <h2>Whispering Shadows (Roblox Hra)</h2>
+                <p style="color: var(--text-secondary); margin: 1rem 0;">Moje první hra na Robloxu, kterou vytvářím celou v Roblox Studiu. Projekt, do kterého jsem investoval nejvíce sil a času (přibližně rok a půl vývoje).</p>
+                
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="projekty/whispering-shadows.html" class="btn" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; padding: 0.7rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Otevřít detail projektu (Stránka hry)</a>
+                    <a href="https://www.roblox.com/games/84645137788989/Whispering-Shadows" target="_blank" class="btn btn-outline" style="border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.7rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Zobrazit na Robloxu</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ZÁLOŽKA: ROADMAP -->
+        <div id="Roadmap" class="tab-content">
+            <h1 style="margin-bottom: 1.5rem;">Plány vývoje <span>(Roadmap)</span></h1>
+            <div class="card" style="padding: 2rem; border-radius: 16px;">
+                <h2>Stav hry Whispering Shadows</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 0.8rem; margin-top: 1rem;">✅ <strong>Hotovo:</strong> Základní návrh světa, rozvržení mapy a atmosféra.</p>
+                <p style="color: var(--text-secondary); margin-bottom: 0.8rem;">🔄 <strong>Právě probíhá:</strong> Ladění skriptů v Lua a opravování chyb.</p>
+                <p style="color: var(--text-secondary);">⏳ <strong>Plán do budoucna:</strong> Vylepšení grafiky, doladění modelů a oficiální vydání do skupiny Cezans Arcade CZE během mých 4 let na střední škole.</p>
+            </div>
+        </div>
+
+        <!-- 4. ZÁLOŽKA: VYBAVENÍ -->
+        <div id="vybaveni" class="tab-content">
+            <h1 style="margin-bottom: 1.5rem;">Moje <span>Vybavení</span></h1>
+            <div class="card" style="padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem;">
+                <h2>Počítač & Programy</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.8rem;"><strong>Hardware:</strong> Desktop PC s procesorem AMD, základní deskou ASUS TUF GAMING a grafikou NVIDIA RTX (Windows 11).</p>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Software:</strong> Pro psaní kódu a tvorbu webů používám VS Code, pro vývoj her Roblox Studio.</p>
+            </div>
+            <div class="card" style="padding: 2rem; border-radius: 16px;">
+                <h2>Natáčení & Audio</h2>
+                <p style="color: var(--text-secondary); margin-top: 0.8rem;"><strong>Video:</strong> Kamera DJI Osmo Action 4 + gimbal FeiyuSCORP Mini 3 Pro.</p>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Zvuk:</strong> XLR mikrofon Fifine AM8PROT-W a mixážní pult Fifine AmpliGame SC3.</p>
+            </div>
+        </div>
+
+        <!-- 5. ZÁLOŽKA: CO UMÍM -->
+        <div id="co-umim" class="tab-content">
+            <h1 style="margin-bottom: 1.5rem;">Co <span>umím & nabízím</span></h1>
+            <div class="card" style="padding: 2rem; border-radius: 16px;">
+                <h2>Tvorba her a skriptování (Lua)</h2>
+                <p style="color: var(--text-secondary); margin: 1rem 0;">Umím postavit herní prostředí v Roblox Studiu a zkouším si vytvářet vlastní scripty – například do partu, kde když se entita dotkne bloku, tak zemře (viz foto níže):</p>
+                <img src="img/script.png" alt="Roblox Script" style="width: 100%; border-radius: 10px; border: 1px solid var(--border-color); margin: 1rem 0;">
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Tento script jsem se pokusil udělat sám, ale napoprvé se to nepovedlo, takže musela pomoci AI. Právě proto jsem zvolil tuto střední školu, od které očekávám, že se naučím mnohem více věcí ohledně počítačů a programování.</p>
+            </div>
+        </div>
+
+        <!-- 6. ZÁLOŽKA: KONTAKT -->
+        <div id="Kontakt" class="tab-content">
+            <h1 style="margin-bottom: 1.5rem;">Kontakt & <span>Odkazy</span></h1>
+            <div class="card" style="padding: 2rem; border-radius: 16px;">
+                <h2>Kde mě najdeš</h2>
+                <p style="color: var(--text-secondary); margin: 1rem 0;">Sleduj vývoj mých her nebo se přidej do mé komunity na Robloxu:</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://www.roblox.com/communities/14502901/Cezans-Arcade-CZE#!/about" target="_blank" class="btn" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; padding: 0.7rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Cezans Arcade CZE (Skupina)</a>
+                    <a href="https://www.roblox.com/games/84645137788989/Whispering-Shadows" target="_blank" class="btn btn-outline" style="border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.7rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Whispering Shadows (Hra)</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 3rem;">
+        <p>&copy; 2026 Adam Čežík</p>
+    </footer>
+
+    <!-- JAVASCRIPT PRO PŘEPÍNÁNÍ ZÁLOŽEK, TÉMAT A MOBILNÍ MENU -->
+    <script>
+        // 1. Přepínání záložek
+        function openTab(evt, tabName) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active-tab");
+            }
+
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active-tab");
+
+            if (evt && evt.currentTarget && evt.currentTarget.classList.contains("tab-btn")) {
+                evt.currentTarget.classList.add("active");
+            } else {
+                let targetBtn = document.querySelector(`.tab-btn[onclick*="${tabName}"]`);
+                if (targetBtn) targetBtn.classList.add("active");
+            }
+
+            // Pokud jsme na mobilu, po kliknutí na záložku se menu zavře
+            document.getElementById("nav-list").classList.remove("active-menu");
+        }
+
+        // 2. Mobilní burger menu toggle
+        function toggleMobileMenu() {
+            const navList = document.getElementById("nav-list");
+            navList.classList.toggle("active-menu");
+        }
+
+        // 3. Přepínání Dark / Light mode s pamětí v prohlížeči
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById("theme-toggle");
+            
+            if (body.getAttribute("data-theme") === "dark") {
+                body.setAttribute("data-theme", "light");
+                themeBtn.innerText = "☀️";
+                localStorage.setItem("portfolio_theme", "light");
+            } else {
+                body.setAttribute("data-theme", "dark");
+                themeBtn.innerText = "🌙";
+                localStorage.setItem("portfolio_theme", "dark");
+            }
+        }
+
+        // Načtení uloženého tématu při startu stránky
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem("portfolio_theme");
+            const themeBtn = document.getElementById("theme-toggle");
+            if (savedTheme === "light") {
+                document.body.setAttribute("data-theme", "light");
+                themeBtn.innerText = "☀️";
+            } else {
+                document.body.setAttribute("data-theme", "dark");
+                themeBtn.innerText = "🌙";
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Čežík | Projekty</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Adam<span>Čežík</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">O mně</a></li>
+                <li><a href="projekty.html" class="active">Projekty</a></li>
+                <li><a href="roadmap.html">Roadmap</a></li>
+                <li><a href="vybaveni.html">Vybavení</a></li>
+                <li><a href="dovednosti.html">Co umím</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Moje <span>Projekty</span></h1>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Vyber si projekt, na který se chceš podívat detailně:</p>
+
+        <!-- MŘÍŽKA PROJEKTŮ (Tady budeš přidávat další, až budeš mít víc her/webů) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            
+            <!-- Karta projektu 1: Whispering Shadows -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h2>Whispering Shadows</h2>
+                    <p>Moje první hra na Robloxu, kterou vytvářím celou v Roblox Studiu přibližně rok a půl. Hororová/atmosférická záležitost ve vývoji.</p>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <!-- Odkaz vede dovnitř složky projekty do konkrétního souboru -->
+                    <a href="projekty/whispering-shadows.html" class="btn">Prohlédnout projekt</a>
+                </div>
+            </div>
+
+            <!-- Až vytvoříš další projekt, jednoduše zkopíruješ celý div.card nahoře a změníš texty a odkaz sem: -->
+            <!-- 
+            <div class="card">
+                <h2>Název dalšího projektu</h2>
+                <p>Popis...</p>
+                <a href="projekty/dalsi-projekt.html" class="btn">Prohlédnout projekt</a>
+            </div> 
+            -->
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Adam Čežík</p>
+    </footer>
+
+</body>
+</html>
