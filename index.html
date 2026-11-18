@@ -433,5 +433,26 @@
         setTimeout(runTypewriter, 2200);
     </script>
 
+
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2 class="card-title">💬 Napiš mi zpětnou vazbu</h2>
+    <p>Máš nápad, co na webu vylepšit, nebo mi chceš něco vzkázat? Sem s tím!</p>
+    
+    <!-- Zde si pak nahradíš URL za svůj kód z Formspree -->
+    <form action="https://formspree.io/f/TVŮJ_KÓD_ZDE" method="POST" style="display: flex; flexDirection: column; gap: 1rem; margin-top: 1.2rem;">
+        
+        <div style="display: flex; flex-direction: column; text-align: left; gap: 0.3rem;">
+            <label for="email" style="font-size: 0.9rem; color: var(--text-muted);">Tvůj e-mail (nepovinné):</label>
+            <input type="email" name="email" placeholder="napr@email.cz" style="padding: 0.75rem; border-radius: 8px; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); color: var(--text-main); font-family: inherit;">
+        </div>
+
+        <div style="display: flex; flex-direction: column; text-align: left; gap: 0.3rem;">
+            <label for="message" style="font-size: 1rem; color: var(--text-muted);">Tvoje zpráva / Co zlepšit:</label>
+            <textarea name="message" rows="4" required placeholder="Tady napiš svou zprávu..." style="padding: 0.75rem; border-radius: 8px; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Odeslat zprávu ✉️</button>
+    </form>
+</div>
 </body>
 </html>
