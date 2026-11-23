@@ -3,60 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabídka – Natáčení kamerou DJI</title>
+    <title>Nabídka | Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <!-- Sem vlož své menu z index.html -->
-    <header>
-        <nav>
-            <a href="index.html">Domů</a>
-            <a href="Dovednosti.html">Dovednosti</a>
-            <a href="Projekty.html">Projekty</a>
-            <a href="Vybavení.html">Vybavení</a>
-            <a href="Nabidka.html" class="active">Nabídka</a>
-            <a href="Kontakt.html">Kontakt</a>
-        </nav>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="brand">Portfolio</a>
+            <nav class="nav-links">
+                <a href="index.html">Domů</a>
+                <a href="Dovednosti.html">Dovednosti</a>
+                <a href="Projekty.html">Projekty</a>
+                <a href="Vybavení.html">Vybavení</a>
+                <a href="Nabidka.html" class="active">Nabídka</a>
+                <a href="Kontakt.html">Kontakt</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="nabidka-nataceni">
-            <span class="stitek">Nabízím</span>
-            <h1>Natáčení kamerou DJI</h1>
+    <main class="container">
+        <div class="page-header">
+            <h1>Nabídka</h1>
+            <p>Aktuální nabídka natáčení kamerou DJI na domluvený čas.</p>
+        </div>
 
-            <div class="nabidka-obsah">
-                <div class="nabidka-obrazek">
-                    <img src="img/dji-nataceni.jpg" alt="Natáčení kamerou DJI">
-                </div>
-
-                <div class="nabidka-popis-box">
-                    <div class="cena">Od 500 Kč / hodina</div>
-
-                    <p class="popis">
-                        Nabízím natáčení videí kamerou DJI na domluvený čas a termín. Hodí se na akce, tréninky, auta, projekty nebo krátké klipy. Čas natáčení i přesný čas domluvíme předem.
-                    </p>
-
-                    <ul class="udaje">
-                        <li><strong>Technika:</strong> Kamera DJI</li>
-                        <li><strong>Délka natáčení:</strong> Např. 1–2 hodiny (dle domluvy)</li>
-                        <li><strong>Čas a termín:</strong> Dle domluvy</li>
-                        <li><strong>Lokalita:</strong> Dle domluvy</li>
-                        <li><strong>Předání:</strong> Zaslaní natočených záběrů / domluvou</li>
-                    </ul>
-
-                    <div class="akce">
-                        <a href="Kontakt.html" class="tlacitko">Domluvit čas a natáčení</a>
-                    </div>
-                </div>
+        <article class="card offer-layout">
+            <div class="offer-media">
+                <!-- Doplň reálný soubor ze složky img/, aby se nezobrazovala rozbitá ikona -->
+                <img src="img/dji.jpg" alt="Natáčení kamerou DJI">
             </div>
-        </section>
+
+            <div class="offer-body">
+                <span class="badge">Nabízím</span>
+                <h2>Natáčení kamerou DJI</h2>
+                <div class="price">Dle domluvy</div>
+                <p>
+                    Nabízím natáčení videí kamerou DJI na domluvený čas a termín. Délku natáčení i přesný čas si nastavíme podle toho, co potřebuješ natočit.
+                </p>
+
+                <ul class="meta-list">
+                    <li><span>Zařízení</span><strong>Kamera DJI</strong></li>
+                    <li><span>Čas natáčení</span><strong>Dle domluvy</strong></li>
+                    <li><span>Termín a čas</span><strong>Dle domluvy</strong></li>
+                    <li><span>Předání záběrů</span><strong>Dle domluvy</strong></li>
+                </ul>
+
+                <a href="Kontakt.html" class="btn">Domluvit čas</a>
+            </div>
+        </article>
     </main>
 
-    <!-- Sem vlož svoji patičku z index.html -->
-    <footer>
-        <p>&copy; 2026 Adam Čežík</p>
+    <footer class="site-footer">
+        <p>&copy; 2026 Portfolio</p>
     </footer>
-
 </body>
 </html>
