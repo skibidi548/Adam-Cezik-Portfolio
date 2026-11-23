@@ -6,75 +6,32 @@
     <title>Co nabízím | Adam Čežík</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Styly pro taby, rezervační box a feedback – ideálně přesuň do css/style.css */
-        .page-wrap {
+        /* Lokální styly pro taby a objednávkový systém uprostřed */
+        .offer-container {
             max-width: 1120px;
             margin: 0 auto;
-            padding: 32px 20px 64px;
+            padding: 32px 20px 24px;
         }
 
-        .offer-hero-card {
-            background: rgba(15, 22, 38, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 24px;
-            display: grid;
-            grid-template-columns: 1.35fr 0.85fr;
-            gap: 24px;
+        .offer-top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
+            gap: 16px;
             margin-bottom: 24px;
         }
 
-        .offer-hero-media img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-            background: #0b1020;
-        }
-
-        .offer-cta-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 18px;
-        }
-
-        .btn-special-book {
-            background: linear-gradient(135deg, #7c3aed, #3b82f6);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 20px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .btn-ghost {
-            background: rgba(255, 255, 255, 0.05);
-            color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 10px;
-            padding: 12px 18px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        /* Taby na překlikávání */
-        .tabs-bar {
+        .tabs-nav {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 20px;
         }
 
-        .tab-btn {
-            background: rgba(15, 22, 38, 0.85);
+        .tab-trigger {
+            background: rgba(15, 23, 42, 0.85);
             color: #cbd5e1;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 10px;
             padding: 10px 16px;
             font-weight: 600;
@@ -82,112 +39,104 @@
             font-family: inherit;
         }
 
-        .tab-btn.active {
+        .tab-trigger.is-active {
             background: linear-gradient(135deg, #6366f1, #3b82f6);
             color: #fff;
             border-color: transparent;
         }
 
-        .tab-panel {
+        .btn-book-now {
+            background: linear-gradient(135deg, #7c3aed, #3b82f6);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .tab-view {
             display: none;
         }
 
-        .tab-panel.active {
+        .tab-view.is-active {
             display: block;
         }
 
-        .panel-card {
-            background: rgba(15, 22, 38, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Objednávaný systém uprostřed */
+        .order-center-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .order-layout {
+            display: grid;
+            grid-template-columns: 1.25fr 0.9fr;
+            gap: 22px;
+        }
+
+        .order-panel {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 16px;
             padding: 24px;
-            margin-bottom: 24px;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .info-box {
-            background: #0b1020;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 16px;
-        }
-
-        .info-box h3 {
-            font-size: 1rem;
-            margin-bottom: 6px;
-        }
-
-        .info-box p {
-            color: #94a3b8;
-            font-size: 0.92rem;
-        }
-
-        /* Rezervační část */
-        .booking-box {
-            display: grid;
-            grid-template-columns: 1.3fr 0.9fr;
-            gap: 24px;
-        }
-
-        .booking-grid {
+        .form-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-top: 16px;
+            margin-top: 14px;
         }
 
-        .field {
+        .input-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .field label {
+        .input-group label {
             font-size: 0.9rem;
             color: #cbd5e1;
         }
 
-        .field input,
-        .field select,
-        .field textarea {
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
             background: #0b1020;
             color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 10px;
             padding: 10px 12px;
             font-family: inherit;
         }
 
-        .time-slots {
+        .quick-times {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
-        .slot-btn {
+        .quick-time-btn {
             background: #0b1020;
             color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 8px;
-            padding: 8px 12px;
+            padding: 7px 11px;
             cursor: pointer;
             font-family: inherit;
+            font-size: 0.9rem;
         }
 
-        .slot-btn.active {
+        .quick-time-btn.is-active {
             background: #6366f1;
             border-color: #818cf8;
             color: #fff;
         }
 
-        .summary-line {
+        .summary-row {
             display: flex;
             justify-content: space-between;
             gap: 12px;
@@ -196,412 +145,269 @@
             font-size: 0.95rem;
         }
 
-        .booking-actions {
+        .order-btns {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 18px;
         }
 
-        #booking-status,
-        #feedback-status {
+        .btn-copy {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        #orderStatus {
             margin-top: 12px;
             font-size: 0.9rem;
             color: #a5b4fc;
         }
 
-        /* Feedback dole */
-        .feedback-list {
+        .info-card-grid {
             display: grid;
-            gap: 12px;
-            margin-top: 18px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
         }
 
-        .feedback-item {
+        .info-tile {
             background: #0b1020;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            padding: 14px 16px;
+            padding: 16px;
         }
 
-        .feedback-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            margin-bottom: 6px;
-        }
-
-        @media (max-width: 860px) {
-            .offer-hero-card,
-            .booking-box,
-            .info-grid,
-            .booking-grid {
+        @media (max-width: 820px) {
+            .order-layout,
+            .form-row-2,
+            .info-card-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sem vlož svůj přesný <header> z index.html / Projekty.html -->
+    <!-- Sem vlož svůj přesný <header> se značkou <Adam Čežík />, odkazy a přepínačem motivu -->
 
-    <main class="page-wrap">
-        <h1>Co nabízím</h1>
-        <p>Natáčení kamerou DJI na domluvený čas – přehled, detaily a přímá rezervace termínu.</p>
-
-        <!-- Úvodní karta nabídky + speciální tlačítko na rezervaci -->
-        <section class="offer-hero-card">
-            <div>
-                <h2>Natáčení kamerou DJI</h2>
-                <p style="margin-top: 8px; color: #cbd5e1;">
-                    Domluvíme si konkrétní den, čas a orientační délku natáčení podle toho, co potřebuješ zachytit. Vše si můžeš rovnou naklikat v rezervaci nebo přepnout mezi záložkami níže.
-                </p>
-
-                <div class="offer-cta-row">
-                    <button type="button" class="btn-special-book" id="jumpToBookingBtn">Rezervovat termín</button>
-                    <button type="button" class="btn-ghost" data-open-tab="tab-info">Více informací</button>
-                </div>
+    <main class="offer-container">
+        <div class="offer-top-bar">
+            <div class="tabs-nav" role="tablist">
+                <button type="button" class="tab-trigger is-active" data-target="view-order">Objednávkový systém</button>
+                <button type="button" class="tab-trigger" data-target="view-info">Doplňující info</button>
+                <button type="button" class="tab-trigger" data-target="view-terms">Podmínky a čas</button>
             </div>
 
-            <div class="offer-hero-media">
-                <!-- Uprav cestu podle názvu souboru ve složce img/ -->
-                <img src="img/dji-camera.jpg" alt="Kamera DJI">
+            <button type="button" class="btn-book-now" id="openOrderBtn">Rezervovat termín</button>
+        </div>
+
+        <!-- TAB 1: Pouze objednávkový systém uprostřed -->
+        <section class="tab-view is-active" id="view-order">
+            <div class="order-center-wrap">
+                <div class="order-layout">
+                    <div class="order-panel">
+                        <h2>Objednávka natáčení kamerou DJI</h2>
+
+                        <div class="form-row-2">
+                            <div class="input-group">
+                                <label for="orderDate">Datum (kalendář)</label>
+                                <input type="date" id="orderDate">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="exactTime">Přesný čas začátku</label>
+                                <input type="time" id="exactTime" value="14:00">
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="margin-top: 14px;">
+                            <label>Rychlé předvolby času (nebo zadej přesný čas vlevo)</label>
+                            <div class="quick-times" id="quickTimes">
+                                <button type="button" class="quick-time-btn" data-time="09:30">09:30</button>
+                                <button type="button" class="quick-time-btn" data-time="12:00">12:00</button>
+                                <button type="button" class="quick-time-btn is-active" data-time="14:00">14:00</button>
+                                <button type="button" class="quick-time-btn" data-time="16:30">16:30</button>
+                            </div>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="input-group">
+                                <label for="orderDuration">Délka / čas natáčení</label>
+                                <select id="orderDuration">
+                                    <option value="1 hodina">1 hodina</option>
+                                    <option value="1,5 hodiny">1,5 hodiny</option>
+                                    <option value="2 hodiny">2 hodiny</option>
+                                    <option value="3 hodiny">3 hodiny</option>
+                                    <option value="Dle domluvy">Dle domluvy</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="orderPlace">Místo / domluva</label>
+                                <input type="text" id="orderPlace" placeholder="Např. Most, Chomutov, Kadaň nebo dle domluvy">
+                            </div>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="input-group">
+                                <label for="orderName">Jméno / přezdívka</label>
+                                <input type="text" id="orderName" placeholder="Tvoje jméno">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="orderContact">Kontakt (e-mail / Instagram / tel.)</label>
+                                <input type="text" id="orderContact" placeholder="Kam ti mám odepsat">
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="margin-top: 14px;">
+                            <label for="orderNote">Co budeme natáčet / upřesnění času</label>
+                            <textarea id="orderNote" rows="3" placeholder="Napiš detaily k natáčení nebo požadovaný čas..."></textarea>
+                        </div>
+                    </div>
+
+                    <aside class="order-panel">
+                        <h2>Přehled objednávky</h2>
+
+                        <div style="margin-top: 10px;">
+                            <div class="summary-row">
+                                <span>Nabídka</span>
+                                <strong>Natáčení kamerou DJI</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Datum</span>
+                                <strong id="sumOrderDate">-</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Přesný čas</span>
+                                <strong id="sumOrderTime">14:00</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Délka</span>
+                                <strong id="sumOrderDuration">1 hodina</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Místo</span>
+                                <strong id="sumOrderPlace">Dle domluvy</strong>
+                            </div>
+                        </div>
+
+                        <div class="order-btns">
+                            <button type="button" class="btn-book-now" id="sendOrderMail">Odeslat objednávku</button>
+                            <button type="button" class="btn-copy" id="copyOrderText">Zkopírovat údaje</button>
+                        </div>
+
+                        <p id="orderStatus"></p>
+                    </aside>
+                </div>
             </div>
         </section>
 
-        <!-- Překlikávací taby -->
-        <div class="tabs-bar" role="tablist">
-            <button type="button" class="tab-btn active" data-tab="tab-rezervace">Rezervace a kalendář</button>
-            <button type="button" class="tab-btn" data-tab="tab-info">Doplňující info</button>
-            <button type="button" class="tab-btn" data-tab="tab-prubeh">Jak domluva probíhá</button>
-        </div>
-
-        <!-- TAB 1: Rezervace -->
-        <div class="tab-panel active" id="tab-rezervace">
-            <div class="booking-box" id="bookingSection">
-                <section class="panel-card" style="margin-bottom: 0;">
-                    <h2>1. Vyber termín a čas schůzky</h2>
-
-                    <div class="booking-grid">
-                        <div class="field">
-                            <label for="datum">Datum (kalendář)</label>
-                            <input type="date" id="datum" name="datum">
-                        </div>
-
-                        <div class="field">
-                            <label for="delka">Délka natáčení</label>
-                            <select id="delka" name="delka">
-                                <option value="1 hodina">1 hodina</option>
-                                <option value="2 hodiny">2 hodiny</option>
-                                <option value="3 hodiny">3 hodiny</option>
-                                <option value="Dle domluvy">Dle domluvy</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field" style="margin-top: 16px;">
-                        <label>Čas schůzky / začátku</label>
-                        <div class="time-slots" id="timeSlots">
-                            <button type="button" class="slot-btn active" data-time="10:00">10:00</button>
-                            <button type="button" class="slot-btn" data-time="13:00">13:00</button>
-                            <button type="button" class="slot-btn" data-time="15:30">15:30</button>
-                            <button type="button" class="slot-btn" data-time="17:30">17:30</button>
-                        </div>
-                    </div>
-
-                    <div class="booking-grid">
-                        <div class="field">
-                            <label for="lokalita">Místo / lokalita</label>
-                            <input type="text" id="lokalita" placeholder="Např. Most / okolí / dle domluvy">
-                        </div>
-
-                        <div class="field">
-                            <label for="jmeno">Tvoje jméno nebo přezdívka</label>
-                            <input type="text" id="jmeno" placeholder="Jak ti mám říkat?">
-                        </div>
-                    </div>
-
-                    <div class="field" style="margin-top: 16px;">
-                        <label for="poznamka">Doplňující info k natáčení</label>
-                        <textarea id="poznamka" rows="3" placeholder="Co budeme točit, jaké máš představy nebo požadavky..."></textarea>
-                    </div>
-                </section>
-
-                <aside class="panel-card" style="margin-bottom: 0;">
-                    <h2>2. Přehled rezervace</h2>
-                    <p style="color: #94a3b8; font-size: 0.92rem;">Zkontroluj si zvolený čas a odešli poptávku.</p>
-
-                    <div style="margin-top: 14px;">
-                        <div class="summary-line">
-                            <span>Nabídka</span>
-                            <strong>Natáčení kamerou DJI</strong>
-                        </div>
-                        <div class="summary-line">
-                            <span>Datum</span>
-                            <strong id="sumDatum">Nevybráno</strong>
-                        </div>
-                        <div class="summary-line">
-                            <span>Čas</span>
-                            <strong id="sumCas">10:00</strong>
-                        </div>
-                        <div class="summary-line">
-                            <span>Délka</span>
-                            <strong id="sumDelka">1 hodina</strong>
-                        </div>
-                        <div class="summary-line">
-                            <span>Místo</span>
-                            <strong id="sumLokalita">Dle domluvy</strong>
-                        </div>
-                    </div>
-
-                    <div class="booking-actions">
-                        <button type="button" class="btn-special-book" id="sendMailBtn">Odeslat e-mailem</button>
-                        <button type="button" class="btn-ghost" id="copyTextBtn">Zkopírovat text</button>
-                    </div>
-
-                    <p id="booking-status"></p>
-                </aside>
-            </div>
-        </div>
-
         <!-- TAB 2: Doplňující info -->
-        <div class="tab-panel" id="tab-info">
-            <section class="panel-card">
+        <section class="tab-view" id="view-info">
+            <div class="order-panel">
                 <h2>Doplňující informace</h2>
-                <p style="color: #cbd5e1; margin-top: 6px;">
-                    Sem si můžeš upravit přesné detaily podle toho, jak si natáčení nastavuješ.
+                <div class="info-card-grid">
+                    <div class="info-tile">
+                        <h3>Kamera DJI</h3>
+                        <p>Natáčení na domluvený čas a účel podle toho, co zrovna potřebuješ natočit.</p>
+                    </div>
+                    <div class="info-tile">
+                        <h3>Přesný čas schůzky</h3>
+                        <p>Zvol si konkrétní čas v objednávkovém systému, případně ho upřesníme společně.</p>
+                    </div>
+                    <div class="info-tile">
+                        <h3>Doplňující požadavky</h3>
+                        <p>Sem si můžeš dopsat vlastní poznámky k lokalitě, tempu nebo předání záběrů.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: Podmínky a čas -->
+        <section class="tab-view" id="view-terms">
+            <div class="order-panel">
+                <h2>Podmínky a časová domluva</h2>
+                <p style="margin-top: 8px; color: #cbd5e1;">
+                    Vše se domlouvá předem podle volného času, místa a délky natáčení. Po odeslání nebo zkopírování údajů stačí termín potvrdit.
                 </p>
-
-                <div class="info-grid">
-                    <div class="info-box">
-                        <h3>Čas a flexibilita</h3>
-                        <p>Čas schůzky i délku natáčení bereme jako orientační domluvu – vše si potvrdíme předem.</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Technika</h3>
-                        <p>Natáčení kamerou DJI podle typu záběrů, pohybu a prostředí.</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Předání záběrů</h3>
-                        <p>Formát i způsob předání surových nebo upravených záběrů domluvíme individuálně.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- TAB 3: Jak domluva probíhá -->
-        <div class="tab-panel" id="tab-prubeh">
-            <section class="panel-card">
-                <h2>Jak domluva probíhá</h2>
-                <div class="info-grid">
-                    <div class="info-box">
-                        <h3>1. Výběr termínu</h3>
-                        <p>Vybereš datum v kalendáři, čas schůzky a orientační délku natáčení.</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>2. Odeslání údajů</h3>
-                        <p>Zprávu si zkopíruješ nebo odešleš e-mailem se všemi vyplněnými detaily.</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>3. Potvrzení času</h3>
-                        <p>Doladíme přesné místo, čas a co přesně se bude natáčet.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Sekce Feedback dole -->
-        <section class="panel-card" id="feedbackSection">
-            <h2>Feedback</h2>
-            <p style="color: #94a3b8; font-size: 0.92rem;">
-                Napiš krátkou zpětnou vazbu k nabídce nebo rezervaci.
-            </p>
-
-            <div class="booking-grid">
-                <div class="field">
-                    <label for="fbName">Jméno / přezdívka</label>
-                    <input type="text" id="fbName" placeholder="Např. Lukáš">
-                </div>
-                <div class="field">
-                    <label for="fbRating">Hodnocení</label>
-                    <select id="fbRating">
-                        <option value="5/5 – Super">5/5 – Super</option>
-                        <option value="4/5 – Dobré">4/5 – Dobré</option>
-                        <option value="3/5 – Ujde">3/5 – Ujde</option>
-                    </select>
-                </div>
             </div>
-
-            <div class="field" style="margin-top: 14px;">
-                <label for="fbMessage">Zpráva / feedback</label>
-                <textarea id="fbMessage" rows="2" placeholder="Co ti tu přijde fajn nebo co by šlo vylepšit..."></textarea>
-            </div>
-
-            <div class="booking-actions">
-                <button type="button" class="btn-special-book" id="addFeedbackBtn">Přidat feedback</button>
-            </div>
-            <p id="feedback-status"></p>
-
-            <div class="feedback-list" id="feedbackList"></div>
         </section>
     </main>
 
-    <!-- Sem vlož svoji patičku (footer) z ostatních stránek -->
+    <!-- Sem vlož svůj stávající blok "Napiš mi zpětnou vazbu" a patičku © 2026 Adam Čežík -->
 
     <script>
-        // Přepínání tabů + speciální tlačítko na rezervaci
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabPanels = document.querySelectorAll('.tab-panel');
-        const jumpToBookingBtn = document.getElementById('jumpToBookingBtn');
-        const openInfoButtons = document.querySelectorAll('[data-open-tab]');
+        // Přepínání tabů
+        const tabTriggers = document.querySelectorAll('.tab-trigger');
+        const tabViews = document.querySelectorAll('.tab-view');
+        const openOrderBtn = document.getElementById('openOrderBtn');
 
-        function openTab(tabId, scrollTarget = null) {
-            tabButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === tabId));
-            tabPanels.forEach((panel) => panel.classList.toggle('active', panel.id === tabId));
-            if (scrollTarget) {
-                scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+        function activateTab(targetId) {
+            tabTriggers.forEach((btn) => btn.classList.toggle('is-active', btn.dataset.target === targetId));
+            tabViews.forEach((view) => view.classList.toggle('is-active', view.id === targetId));
         }
 
-        tabButtons.forEach((btn) => {
-            btn.addEventListener('click', () => openTab(btn.dataset.tab));
+        tabTriggers.forEach((btn) => {
+            btn.addEventListener('click', () => activateTab(btn.dataset.target));
         });
 
-        openInfoButtons.forEach((btn) => {
-            btn.addEventListener('click', () => openTab(btn.dataset.openTab));
+        openOrderBtn.addEventListener('click', () => {
+            activateTab('view-order');
+            document.getElementById('view-order').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
-        jumpToBookingBtn.addEventListener('click', () => {
-            openTab('tab-rezervace', document.getElementById('bookingSection'));
-        });
+        // Logika objednávky + přesný čas
+        const orderDate = document.getElementById('orderDate');
+        const exactTime = document.getElementById('exactTime');
+        const orderDuration = document.getElementById('orderDuration');
+        const orderPlace = document.getElementById('orderPlace');
+        const orderName = document.getElementById('orderName');
+        const orderContact = document.getElementById('orderContact');
+        const orderNote = document.getElementById('orderNote');
+        const quickTimeBtns = document.querySelectorAll('.quick-time-btn');
 
-        // Rezervace
-        const datumInput = document.getElementById('datum');
-        const delkaInput = document.getElementById('delka');
-        const lokalitaInput = document.getElementById('lokalita');
-        const jmenoInput = document.getElementById('jmeno');
-        const poznamkaInput = document.getElementById('poznamka');
-        const slotButtons = document.querySelectorAll('.slot-btn');
+        const sumOrderDate = document.getElementById('sumOrderDate');
+        const sumOrderTime = document.getElementById('sumOrderTime');
+        const sumOrderDuration = document.getElementById('sumOrderDuration');
+        const sumOrderPlace = document.getElementById('sumOrderPlace');
+        const orderStatus = document.getElementById('orderStatus');
 
-        const sumDatum = document.getElementById('sumDatum');
-        const sumCas = document.getElementById('sumCas');
-        const sumDelka = document.getElementById('sumDelka');
-        const sumLokalita = document.getElementById('sumLokalita');
-        const statusEl = document.getElementById('booking-status');
+        const todayIso = new Date().toISOString().split('T')[0];
+        orderDate.min = todayIso;
+        orderDate.value = todayIso;
 
-        let selectedTime = '10:00';
-        const today = new Date().toISOString().split('T')[0];
-        datumInput.min = today;
-        datumInput.value = today;
-
-        function updateSummary() {
-            sumDatum.textContent = datumInput.value || 'Nevybráno';
-            sumCas.textContent = selectedTime;
-            sumDelka.textContent = delkaInput.value;
-            sumLokalita.textContent = lokalitaInput.value.trim() || 'Dle domluvy';
+        function syncQuickTimes(currentVal) {
+            quickTimeBtns.forEach((btn) => {
+                btn.classList.toggle('is-active', btn.dataset.time === currentVal);
+            });
         }
 
-        slotButtons.forEach((btn) => {
+        function refreshSummary() {
+            sumOrderDate.textContent = orderDate.value || '-';
+            sumOrderTime.textContent = exactTime.value || 'Dle domluvy';
+            sumOrderDuration.textContent = orderDuration.value;
+            sumOrderPlace.textContent = orderPlace.value.trim() || 'Dle domluvy';
+        }
+
+        quickTimeBtns.forEach((btn) => {
             btn.addEventListener('click', () => {
-                slotButtons.forEach((b) => b.classList.remove('active'));
-                btn.classList.add('active');
-                selectedTime = btn.dataset.time;
-                updateSummary();
+                exactTime.value = btn.dataset.time;
+                syncQuickTimes(btn.dataset.time);
+                refreshSummary();
             });
         });
 
-        [datumInput, delkaInput, lokalitaInput].forEach((el) => {
-            el.addEventListener('input', updateSummary);
-            el.addEventListener('change', updateSummary);
+        exactTime.addEventListener('input', () => {
+            syncQuickTimes(exactTime.value);
+            refreshSummary();
         });
 
-        function buildMessage() {
-            return [
-                'Rezervace natáčení kamerou DJI',
-                `Datum: ${datumInput.value || 'neuvedeno'}`,
-                `Čas: ${selectedTime}`,
-                `Délka: ${delkaInput.value}`,
-                `Místo: ${lokalitaInput.value.trim() || 'dle domluvy'}`,
-                `Jméno: ${jmenoInput.value.trim() || 'neuvedeno'}`,
-                `Doplňující info: ${poznamkaInput.value.trim() || 'bez poznámky'}`
-            ].join('\n');
-        }
-
-        document.getElementById('copyTextBtn').addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(buildMessage());
-                statusEl.textContent = 'Text rezervace zkopírován do schránky.';
-            } catch {
-                statusEl.textContent = 'Kopírování do schránky se nepodařilo.';
-            }
-        });
-
-        document.getElementById('sendMailBtn').addEventListener('click', () => {
-            const subject = encodeURIComponent(`Rezervace DJI (${datumInput.value || 'termín'} ${selectedTime})`);
-            const body = encodeURIComponent(buildMessage());
-            window.location.href = `mailto:tvuj-email@domena.cz?subject=${subject}&body=${body}`;
-            statusEl.textContent = 'Otevírám e-mailového klienta s vyplněnými údaji.';
-        });
-
-        updateSummary();
-
-        // Feedback uložený lokálně v prohlížeči
-        const fbName = document.getElementById('fbName');
-        const fbRating = document.getElementById('fbRating');
-        const fbMessage = document.getElementById('fbMessage');
-        const fbList = document.getElementById('feedbackList');
-        const fbStatus = document.getElementById('feedback-status');
-        const STORAGE_KEY = 'nabidka_dji_feedback_v1';
-
-        function loadFeedback() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            } catch {
-                return [];
-            }
-        }
-
-        function renderFeedback() {
-            const items = loadFeedback();
-            fbList.innerHTML = '';
-            if (!items.length) {
-                fbList.innerHTML = '<p style="color:#94a3b8;font-size:0.9rem;">Zatím tu není žádný feedback.</p>';
-                return;
-            }
-            items.slice().reverse().forEach((item) => {
-                const div = document.createElement('div');
-                div.className = 'feedback-item';
-                div.innerHTML = `
-                    <div class="feedback-meta">
-                        <strong>${item.name}</strong>
-                        <span>${item.rating} · ${item.date}</span>
-                    </div>
-                    <p>${item.text}</p>
-                `;
-                fbList.appendChild(div);
-            });
-        }
-
-        document.getElementById('addFeedbackBtn').addEventListener('click', () => {
-            const text = fbMessage.value.trim();
-            if (!text) {
-                fbStatus.textContent = 'Nejdřív napiš text feedbacku.';
-                return;
-            }
-            const items = loadFeedback();
-            items.push({
-                name: fbName.value.trim() || 'Anonym',
-                rating: fbRating.value,
-                text,
-                date: new Date().toLocaleDateString('cs-CZ')
-            });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-            fbMessage.value = '';
-            fbStatus.textContent = 'Feedback přidán.';
-            renderFeedback();
-        });
-
-        renderFeedback();
-    </script>
-</body>
-</html>
+        [orderDate, orderDuration, orderPlace].forEach((el) => {
+            el.addEventListener('input', refreshSummary);
+            el
