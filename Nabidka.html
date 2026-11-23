@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabídka | Portfolio</title>
-    <!-- Tady připoj svůj vlastní CSS soubor ze složky css/ -->
+    <title>Nabídka produktů</title>
+    <!-- Napojení na tvůj existující CSS soubor -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Sem vlož svoje navigační menu z index.html -->
+    <!-- Sem vlož své menu z index.html -->
     <header>
         <nav>
             <a href="index.html">Domů</a>
@@ -22,54 +22,64 @@
     </header>
 
     <main>
-        <section class="nabidka-sekce">
-            <h1>Co nabízím</h1>
-            <p>Hledáš výpomoc s projektem nebo vlastní tvorbu na míru? Tady je přehled mých služeb.</p>
+        <section class="produkty-sekce">
+            <h1>Nabídka produktů</h1>
+            <p>Aktuální věci a produkty, které mám na prodej.</p>
 
-            <!-- Kontejner pro jednotlivé inzeráty / karty -->
-            <div class="inzeraty-grid">
+            <!-- Mřížka / seznam produktů -->
+            <div class="produkty-grid">
 
-                <!-- 1. Inzerát -->
-                <article class="karta-inzerat">
-                    <span class="stitek">Nabízím</span>
-                    <img src="img/tvuj-obrazek1.jpg" alt="Ukázka práce">
-                    
-                    <div class="inzerat-obsah">
-                        <h2>Tvorba webových stránek (HTML / CSS)</h2>
-                        <p class="cena">Od 500 Kč / dohodou</p>
-                        <p class="popis">
-                            Vytvořím jednoduchý, rychlý a responzivní osobní web nebo portfolio přesně podle tvých představ.
+                <!-- 1. Produkt -->
+                <article class="produkt-karta">
+                    <div class="produkt-obrazek">
+                        <span class="stitek-stav">Nové / Jako nové</span>
+                        <img src="img/produkt1.jpg" alt="Název produktu 1">
+                    </div>
+
+                    <div class="produkt-info">
+                        <h2>Název produktu 1</h2>
+                        <div class="produkt-cena">1 200 Kč</div>
+                        
+                        <p class="produkt-popis">
+                            Krátký popis produktu, co všechno umí, proč ho prodáváš a co je součástí balení.
                         </p>
 
-                        <ul class="parametry">
-                            <li><strong>Dodání:</strong> 3–7 dní</li>
-                            <li><strong>Technologie:</strong> HTML5, CSS3, JS</li>
-                            <li><strong>Forma:</strong> Online spolupráce</li>
+                        <ul class="produkt-parametry">
+                            <li><strong>Stav:</strong> Plně funkční, bez poškození</li>
+                            <li><strong>Dostupnost:</strong> Skladem (1 ks)</li>
+                            <li><strong>Předání:</strong> Osobně / Zásilkovna</li>
                         </ul>
 
-                        <a href="Kontakt.html" class="tlacitko">Mám zájem</a>
+                        <div class="produkt-akce">
+                            <a href="Kontakt.html" class="btn-koupit">Koupit / Napsat</a>
+                        </div>
                     </div>
                 </article>
 
-                <!-- 2. Inzerát -->
-                <article class="karta-inzerat">
-                    <span class="stitek">Nabízím</span>
-                    <img src="img/tvuj-obrazek2.jpg" alt="Ukázka práce">
-                    
-                    <div class="inzerat-obsah">
-                        <h2>Natáčení a střih videí</h2>
-                        <p class="cena">Dohodou</p>
-                        <p class="popis">
-                            Natočím akční záběry, promo video nebo sestřih z akce pomocí akční kamery a stabilizátoru.
+                <!-- 2. Produkt (zkopíruj tento blok <article> pro každý další produkt) -->
+                <article class="produkt-karta">
+                    <div class="produkt-obrazek">
+                        <span class="stitek-stav">Použité</span>
+                        <img src="img/produkt2.jpg" alt="Název produktu 2">
+                    </div>
+
+                    <div class="produkt-info">
+                        <h2>Název produktu 2</h2>
+                        <div class="produkt-cena">450 Kč</div>
+                        
+                        <p class="produkt-popis">
+                            Popis druhého produktu. Vše připraveno k okamžitému odeslání nebo předání.
                         </p>
 
-                        <ul class="parametry">
-                            <li><strong>Technika:</strong> DJI Osmo Action 4 + gimbal</li>
-                            <li><strong>Lokalita:</strong> Most, Chomutov, Kadaň a okolí</li>
-                            <li><strong>Výstup:</strong> FullHD / 4K video</li>
+                        <ul class="produkt-parametry">
+                            <li><strong>Stav:</strong> Běžné známky používání</li>
+                            <li><strong>Dostupnost:</strong> Skladem (1 ks)</li>
+                            <li><strong>Předání:</strong> Zásilkovna / Dobírka</li>
                         </ul>
 
-                        <a href="Kontakt.html" class="tlacitko">Mám zájem</a>
+                        <div class="produkt-akce">
+                            <a href="Kontakt.html" class="btn-koupit">Koupit / Napsat</a>
+                        </div>
                     </div>
                 </article>
 
@@ -77,7 +87,7 @@
         </section>
     </main>
 
-    <!-- Sem vlož svoji patičku (footer) z index.html -->
+    <!-- Sem vlož svoji patičku z index.html -->
     <footer>
         <p>&copy; 2026 Adam Čežík</p>
     </footer>
