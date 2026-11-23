@@ -18,16 +18,16 @@
             <div class="nav-controls">
                 <ul class="nav-menu" id="navMenu">
                     <li><button class="nav-btn active" onclick="switchTab(event, 'o-mne')">O mně</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Projekty')">Projekty</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Nabidka')">Co nabízím</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Roadmap')">Roadmap</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Vybaveni')">Vybavení</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Co-umim')">Dovednosti</button></li>
-                    <li><button class="nav-btn" onclick="switchTab(event, 'Kontakt')">Kontakt</button></li>
+                    <li><button class="nav-btn" onclick="switchTab(event, 'projekty')">Projekty</button></li>
+                    <li><a class="nav-btn" href="Nabidka.html">Co nabízím</a></li>
+                    <li><button class="nav-btn" onclick="switchTab(event, 'roadmap')">Roadmap</button></li>
+                    <li><button class="nav-btn" onclick="switchTab(event, 'vybaveni')">Vybavení</button></li>
+                    <li><button class="nav-btn" onclick="switchTab(event, 'co-umim')">Dovednosti</button></li>
+                    <li><button class="nav-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                 </ul>
 
                 <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Přepnout tmavý/světlý režim" aria-label="Přepnout vzhled">🌙</button>
-                <button class="icon-btn burger-btn" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+                <button class="icon-btn burger-btn" id="burgerBtn" onclick="toggleMenu(event)" aria-label="Otevřít menu" aria-controls="navMenu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -397,13 +397,33 @@
             if (activeBtn) activeBtn.classList.add('active');
 
             document.getElementById('navMenu').classList.remove('open');
+            document.getElementById('burgerBtn').setAttribute('aria-expanded', 'false');
+            document.getElementById('burgerBtn').setAttribute('aria-label', 'Otevřít menu');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // 2. MOBILNÍ MENU
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('open');
+        function toggleMenu(event) {
+            if (event) event.stopPropagation();
+
+            const menu = document.getElementById('navMenu');
+            const burger = document.getElementById('burgerBtn');
+            const isOpen = menu.classList.toggle('open');
+
+            burger.setAttribute('aria-expanded', String(isOpen));
+            burger.setAttribute('aria-label', isOpen ? 'Zavřít menu' : 'Otevřít menu');
         }
+
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('navMenu');
+            const burger = document.getElementById('burgerBtn');
+
+            if (!menu.contains(event.target) && !burger.contains(event.target)) {
+                menu.classList.remove('open');
+                burger.setAttribute('aria-expanded', 'false');
+                burger.setAttribute('aria-label', 'Otevřít menu');
+            }
+        });
 
         // 3. PŘEPÍNAČ TÉMATU (DARK / LIGHT)
         function toggleTheme() {
@@ -470,7 +490,7 @@
     <p>Máš nápad, co na webu vylepšit, nebo mi chceš něco vzkázat? Sem s tím!</p>
     
     <!-- Zde si pak nahradíš URL za svůj kód z Formspree -->
-    <form action="https://formspree.io/f/mdegpovq" method="POST" style="display: flex; flexDirection: column; gap: 1rem; margin-top: 1.2rem;">
+    <form action="https://formspree.io/f/mdegpovq" method="POST" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.2rem;">
         
         <div style="display: flex; flex-direction: column; text-align: left; gap: 0.3rem;">
             <label for="email" style="font-size: 0.9rem; color: var(--text-muted);">Tvůj e-mail (nepovinné):</label>
