@@ -3,142 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inzerát – Nabízím</title>
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border-color: #e5e7eb;
-            --badge-bg: #dbeafe;
-            --badge-text: #1e40af;
-        }
+    <title>Nabídka | Portfolio</title>
+    <!-- Tady připoj svůj vlastní CSS soubor ze složky css/ -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+    <!-- Sem vlož svoje navigační menu z index.html -->
+    <header>
+        <nav>
+            <a href="index.html">Domů</a>
+            <a href="Dovednosti.html">Dovednosti</a>
+            <a href="Projekty.html">Projekty</a>
+            <a href="Vybavení.html">Vybavení</a>
+            <a href="Nabidka.html" class="active">Nabídka</a>
+            <a href="Kontakt.html">Kontakt</a>
+        </nav>
+    </header>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    <main>
+        <section class="nabidka-sekce">
+            <h1>Co nabízím</h1>
+            <p>Hledáš výpomoc s projektem nebo vlastní tvorbu na míru? Tady je přehled mých služeb.</p>
 
-        .ad-card {
-            background-color: var(--card-bg);
-            max-width: 600px;
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-        }
+            <!-- Kontejner pro jednotlivé inzeráty / karty -->
+            <div class="inzeraty-grid">
 
-        .ad-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background-color: #e5e7eb;
-        }
+                <!-- 1. Inzerát -->
+                <article class="karta-inzerat">
+                    <span class="stitek">Nabízím</span>
+                    <img src="img/tvuj-obrazek1.jpg" alt="Ukázka práce">
+                    
+                    <div class="inzerat-obsah">
+                        <h2>Tvorba webových stránek (HTML / CSS)</h2>
+                        <p class="cena">Od 500 Kč / dohodou</p>
+                        <p class="popis">
+                            Vytvořím jednoduchý, rychlý a responzivní osobní web nebo portfolio přesně podle tvých představ.
+                        </p>
 
-        .ad-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+                        <ul class="parametry">
+                            <li><strong>Dodání:</strong> 3–7 dní</li>
+                            <li><strong>Technologie:</strong> HTML5, CSS3, JS</li>
+                            <li><strong>Forma:</strong> Online spolupráce</li>
+                        </ul>
 
-        .ad-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background-color: var(--badge-bg);
-            color: var(--badge-text);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
+                        <a href="Kontakt.html" class="tlacitko">Mám zájem</a>
+                    </div>
+                </article>
 
-        .ad-content {
-            padding: 28px;
-        }
+                <!-- 2. Inzerát -->
+                <article class="karta-inzerat">
+                    <span class="stitek">Nabízím</span>
+                    <img src="img/tvuj-obrazek2.jpg" alt="Ukázka práce">
+                    
+                    <div class="inzerat-obsah">
+                        <h2>Natáčení a střih videí</h2>
+                        <p class="cena">Dohodou</p>
+                        <p class="popis">
+                            Natočím akční záběry, promo video nebo sestřih z akce pomocí akční kamery a stabilizátoru.
+                        </p>
 
-        .ad-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 16px;
-        }
+                        <ul class="parametry">
+                            <li><strong>Technika:</strong> DJI Osmo Action 4 + gimbal</li>
+                            <li><strong>Lokalita:</strong> Most, Chomutov, Kadaň a okolí</li>
+                            <li><strong>Výstup:</strong> FullHD / 4K video</li>
+                        </ul>
 
-        .ad-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
+                        <a href="Kontakt.html" class="tlacitko">Mám zájem</a>
+                    </div>
+                </article>
 
-        .ad-price {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            white-space: nowrap;
-        }
+            </div>
+        </section>
+    </main>
 
-        .ad-description {
-            color: #4b5563;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
+    <!-- Sem vlož svoji patičku (footer) z index.html -->
+    <footer>
+        <p>&copy; 2026 Adam Čežík</p>
+    </footer>
 
-        .ad-details {
-            list-style: none;
-            background-color: #f9fafb;
-            padding: 16px;
-            border-radius: 10px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
-        }
-
-        .ad-details li {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .ad-details li:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            color: var(--text-muted);
-        }
-
-        .detail-value {
-            font-weight: 600;
-        }
-
-        .ad-footer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-        }
+</body>
+</html>
