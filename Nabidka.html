@@ -1,356 +1,46 @@
-<style>
-    .offer-wrap {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 36px 20px 28px;
-    }
-
-    .offer-bar {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 24px;
-    }
-
-    .tabs-group {
-        display: inline-flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        padding: 5px;
-        border-radius: 14px;
-        background: rgba(15, 23, 42, 0.72);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
-    }
-
-    .tab-btn {
-        background: transparent;
-        color: #94a3b8;
-        border: none;
-        border-radius: 10px;
-        padding: 9px 15px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: inherit;
-        transition: all 0.2s ease;
-    }
-
-    .tab-btn:hover {
-        color: #f8fafc;
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    .tab-btn.is-active {
-        color: #fff;
-        background: linear-gradient(135deg, #6366f1, #3b82f6);
-        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
-    }
-
-    .btn-cta {
-        background: linear-gradient(135deg, #7c3aed, #3b82f6);
-        color: #fff;
-        border: none;
-        border-radius: 12px;
-        padding: 11px 20px;
-        font-size: 0.92rem;
-        font-weight: 700;
-        cursor: pointer;
-        font-family: inherit;
-        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.32);
-        transition: transform 0.15s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-cta:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
-    }
-
-    .tab-pane {
-        display: none;
-    }
-
-    .tab-pane.is-active {
-        display: block;
-        animation: fadeIn 0.22s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(4px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .booking-shell {
-        max-width: 980px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1.3fr 0.85fr;
-        gap: 22px;
-        align-items: start;
-    }
-
-    .glass-card {
-        background: linear-gradient(180deg, rgba(17, 25, 46, 0.88), rgba(11, 17, 32, 0.92));
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 18px;
-        padding: 26px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(12px);
-    }
-
-    .card-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-
-    .card-head h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #f8fafc;
-        margin: 0;
-    }
-
-    .mini-pill {
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #a5b4fc;
-        background: rgba(99, 102, 241, 0.14);
-        border: 1px solid rgba(129, 140, 248, 0.28);
-        padding: 4px 10px;
-        border-radius: 999px;
-        white-space: nowrap;
-    }
-
-    .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-        margin-bottom: 14px;
-    }
-
-    .field-box {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .field-box label {
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: #94a3b8;
-        letter-spacing: 0.01em;
-    }
-
-    .field-box input,
-    .field-box select,
-    .field-box textarea {
-        width: 100%;
-        box-sizing: border-box;
-        background: rgba(7, 11, 22, 0.85);
-        color: #f8fafc;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 11px;
-        padding: 10px 12px;
-        font-size: 0.92rem;
-        font-family: inherit;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .field-box input:focus,
-    .field-box select:focus,
-    .field-box textarea:focus {
-        outline: none;
-        border-color: #818cf8;
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-    }
-
-    .field-box input::placeholder,
-    .field-box textarea::placeholder {
-        color: #64748b;
-        font-size: 0.86rem;
-    }
-
-    .preset-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 2px;
-    }
-
-    .preset-chip {
-        background: rgba(7, 11, 22, 0.85);
-        color: #cbd5e1;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 9px;
-        padding: 6px 12px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: inherit;
-        transition: all 0.15s ease;
-    }
-
-    .preset-chip:hover {
-        border-color: rgba(129, 140, 248, 0.5);
-        color: #fff;
-    }
-
-    .preset-chip.is-active {
-        background: rgba(99, 102, 241, 0.25);
-        border-color: #818cf8;
-        color: #e0e7ff;
-    }
-
-    .summary-box {
-        background: rgba(7, 11, 22, 0.65);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 13px;
-        padding: 6px 14px;
-        margin-bottom: 18px;
-    }
-
-    .summary-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 11px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        font-size: 0.9rem;
-    }
-
-    .summary-row:last-child {
-        border-bottom: none;
-    }
-
-    .summary-row span {
-        color: #94a3b8;
-    }
-
-    .summary-row strong {
-        color: #f8fafc;
-        text-align: right;
-    }
-
-    .summary-highlight {
-        color: #a5b4fc !important;
-    }
-
-    .action-stack {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .btn-secondary-soft {
-        background: rgba(255, 255, 255, 0.05);
-        color: #e2e8f0;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        border-radius: 11px;
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: inherit;
-        transition: background 0.2s ease;
-    }
-
-    .btn-secondary-soft:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .status-note {
-        margin-top: 12px;
-        min-height: 20px;
-        font-size: 0.85rem;
-        color: #a5b4fc;
-    }
-
-    .info-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-    }
-
-    .info-box-clean {
-        background: rgba(7, 11, 22, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 13px;
-        padding: 16px;
-    }
-
-    .info-box-clean h3 {
-        font-size: 0.98rem;
-        margin: 0 0 6px;
-        color: #f8fafc;
-    }
-
-    .info-box-clean p {
-        margin: 0;
-        font-size: 0.88rem;
-        color: #94a3b8;
-        line-height: 1.5;
-    }
-
-    @media (max-width: 860px) {
-        .booking-shell,
-        .grid-2,
-        .info-3 {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-
-<main class="offer-wrap">
-    <div class="offer-bar">
-        <div class="tabs-group" role="tablist">
-            <button type="button" class="tab-btn is-active" data-pane="pane-order">Objednávkový systém</button>
-            <button type="button" class="tab-btn" data-pane="pane-info">Doplňující info</button>
-            <button type="button" class="tab-btn" data-pane="pane-rules">Podmínky a čas</button>
+<main class="nabidka-main">
+    <div class="nabidka-top">
+        <div class="nabidka-tabs" role="tablist">
+            <button type="button" class="nabidka-tab active" data-pane="pane-objednavka">Objednávkový systém</button>
+            <button type="button" class="nabidka-tab" data-pane="pane-info">Doplňující info</button>
+            <button type="button" class="nabidka-tab" data-pane="pane-podminky">Podmínky a čas</button>
         </div>
 
-        <button type="button" class="btn-cta" id="jumpOrderBtn">Rezervovat termín</button>
+        <button type="button" class="nabidka-btn-primary" id="btnSkokNaRezervaci">Rezervovat termín</button>
     </div>
 
-    <section class="tab-pane is-active" id="pane-order">
-        <div class="booking-shell">
-            <div class="glass-card">
-                <div class="card-head">
-                    <h2>Objednávka natáčení</h2>
-                    <span class="mini-pill">Kamera DJI</span>
-                </div>
+    <!-- TAB 1: Objednávkový systém -->
+    <section class="nabidka-pane active" id="pane-objednavka">
+        <div class="rezervace-grid">
+            <div class="rezervace-card">
+                <h2>Objednávka natáčení</h2>
 
-                <div class="grid-2">
-                    <div class="field-box">
-                        <label for="resDate">Datum</label>
-                        <input type="date" id="resDate">
+                <div class="rezervace-row">
+                    <div class="rezervace-field">
+                        <label for="datumRez">Datum</label>
+                        <input type="date" id="datumRez">
                     </div>
 
-                    <div class="field-box">
-                        <label for="resTime">Přesný čas začátku</label>
-                        <input type="time" id="resTime" value="14:00">
+                    <div class="rezervace-field">
+                        <label for="casRez">Přesný čas začátku</label>
+                        <input type="time" id="casRez" value="14:00">
                     </div>
                 </div>
 
-                <div class="field-box" style="margin-bottom: 14px;">
-                    <label>Rychlé časy</label>
-                    <div class="preset-row" id="timePresets">
-                        <button type="button" class="preset-chip" data-t="09:30">09:30</button>
-                        <button type="button" class="preset-chip" data-t="12:00">12:00</button>
-                        <button type="button" class="preset-chip is-active" data-t="14:00">14:00</button>
-                        <button type="button" class="preset-chip" data-t="16:30">16:30</button>
+                <div class="rezervace-field" style="margin-bottom: 14px;">
+                    <label>Rychlé časy (nebo zadej přesný čas vpravo nahoře)</label>
+                    <div class="cas-presety" id="casPresety">
+                        <button type="button" class="cas-preset" data-cas="09:30">09:30</button>
+                        <button type="button" class="cas-preset" data-cas="12:00">12:00</button>
+                        <button type="button" class="cas-preset active" data-cas="14:00">14:00</button>
+                        <button type="button" class="cas-preset" data-cas="16:30">16:30</button>
                     </div>
                 </div>
 
-                <div class="grid-2">
-                    <div class="field-box">
-                        <label for="resLength">Délka natáčení</label>
-                        <select id="resLength">
+                <div class="rezervace-row">
+                    <div class="rezervace-field">
+                        <label for="delkaRez">Délka natáčení</label>
+                        <select id="delkaRez">
                             <option value="1 hodina">1 hodina</option>
                             <option value="1,5 hodiny">1,5 hodiny</option>
                             <option value="2 hodiny">2 hodiny</option>
@@ -359,205 +49,194 @@
                         </select>
                     </div>
 
-                    <div class="field-box">
-                        <label for="resLocation">Lokalita / místo</label>
-                        <input type="text" id="resLocation" placeholder="Např. Most, Chomutov, Kadaň">
+                    <div class="rezervace-field">
+                        <label for="mistoRez">Místo / domluva</label>
+                        <input type="text" id="mistoRez" placeholder="Např. Most, Chomutov, Kadaň">
                     </div>
                 </div>
 
-                <div class="grid-2">
-                    <div class="field-box">
-                        <label for="resName">Jméno / přezdívka</label>
-                        <input type="text" id="resName" placeholder="Tvoje jméno">
+                <div class="rezervace-row">
+                    <div class="rezervace-field">
+                        <label for="jmenoRez">Jméno / přezdívka</label>
+                        <input type="text" id="jmenoRez" placeholder="Tvoje jméno">
                     </div>
 
-                    <div class="field-box">
-                        <label for="resContact">Kontakt</label>
-                        <input type="text" id="resContact" placeholder="E-mail, IG nebo tel.">
+                    <div class="rezervace-field">
+                        <label for="kontaktRez">Kontakt</label>
+                        <input type="text" id="kontaktRez" placeholder="E-mail, IG nebo tel.">
                     </div>
                 </div>
 
-                <div class="field-box">
-                    <label for="resDetails">Detaily / co budeme točit</label>
-                    <textarea id="resDetails" rows="3" placeholder="Upřesni čas, místo nebo styl záběrů..."></textarea>
+                <div class="rezervace-field">
+                    <label for="infoRez">Doplňující info / co budeme točit</label>
+                    <textarea id="infoRez" rows="3" placeholder="Upřesni čas, místo nebo co potřebuješ natočit..."></textarea>
                 </div>
             </div>
 
-            <aside class="glass-card">
-                <div class="card-head">
-                    <h2>Přehled termínu</h2>
-                    <span class="mini-pill">Živý náhled</span>
+            <aside class="rezervace-card">
+                <h2>Přehled termínu</h2>
+
+                <div class="prehled-radek">
+                    <span>Nabídka</span>
+                    <strong>Natáčení DJI</strong>
+                </div>
+                <div class="prehled-radek">
+                    <span>Datum</span>
+                    <strong id="prehledDatum">-</strong>
+                </div>
+                <div class="prehled-radek">
+                    <span>Přesný čas</span>
+                    <strong id="prehledCas">14:00</strong>
+                </div>
+                <div class="prehled-radek">
+                    <span>Délka</span>
+                    <strong id="prehledDelka">1 hodina</strong>
+                </div>
+                <div class="prehled-radek">
+                    <span>Místo</span>
+                    <strong id="prehledMisto">Dle domluvy</strong>
                 </div>
 
-                <div class="summary-box">
-                    <div class="summary-row">
-                        <span>Nabídka</span>
-                        <strong>Natáčení DJI</strong>
-                    </div>
-                    <div class="summary-row">
-                        <span>Datum</span>
-                        <strong id="outDate" class="summary-highlight">Dnes</strong>
-                    </div>
-                    <div class="summary-row">
-                        <span>Přesný čas</span>
-                        <strong id="outTime" class="summary-highlight">14:00</strong>
-                    </div>
-                    <div class="summary-row">
-                        <span>Délka</span>
-                        <strong id="outLength">1 hodina</strong>
-                    </div>
-                    <div class="summary-row">
-                        <span>Místo</span>
-                        <strong id="outLocation">Dle domluvy</strong>
-                    </div>
+                <div class="rezervace-akce">
+                    <button type="button" class="nabidka-btn-primary" id="odeslatRezBtn">Odeslat objednávku</button>
+                    <button type="button" class="nabidka-btn-secondary" id="kopirovatRezBtn">Zkopírovat text termínu</button>
                 </div>
 
-                <div class="action-stack">
-                    <button type="button" class="btn-cta" id="btnMailOrder">Odeslat objednávku</button>
-                    <button type="button" class="btn-secondary-soft" id="btnCopyOrder">Zkopírovat text termínu</button>
-                </div>
-
-                <p class="status-note" id="orderFeedback"></p>
+                <p id="stavRez" style="margin-top: 10px; font-size: 0.85rem;"></p>
             </aside>
         </div>
     </section>
 
-    <section class="tab-pane" id="pane-info">
-        <div class="glass-card">
-            <div class="card-head">
-                <h2>Doplňující informace</h2>
-                <span class="mini-pill">DJI</span>
-            </div>
-            <div class="info-3">
-                <div class="info-box-clean">
+    <!-- TAB 2: Doplňující info -->
+    <section class="nabidka-pane" id="pane-info">
+        <div class="rezervace-card">
+            <h2>Doplňující informace</h2>
+            <div class="rezervace-info-grid">
+                <div class="rezervace-info-box">
+                    <h3>Kamera DJI</h3>
+                    <p>Natáčení na domluvený čas a účel podle toho, co potřebuješ natočit.</p>
+                </div>
+                <div class="rezervace-info-box">
                     <h3>Přesný čas</h3>
-                    <p>Můžeš zadat libovolnou hodinu i minutu podle toho, jak ti to vychází.</p>
+                    <p>Můžeš nastavit konkrétní hodinu i minutu začátku.</p>
                 </div>
-                <div class="info-box-clean">
-                    <h3>Domluva místa</h3>
-                    <p>Lokalitu i délku natáčení doladíme společně předem.</p>
-                </div>
-                <div class="info-box-clean">
-                    <h3>Předání záběrů</h3>
-                    <p>Způsob a formát předání natočeného materiálu si domluvíme individuálně.</p>
+                <div class="rezervace-info-box">
+                    <h3>Domluva</h3>
+                    <p>Délku, místo i předání záběrů si potvrdíme předem.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="tab-pane" id="pane-rules">
-        <div class="glass-card">
-            <div class="card-head">
-                <h2>Podmínky a čas</h2>
-                <span class="mini-pill">Domluva</span>
-            </div>
-            <p style="margin: 0; color: #cbd5e1; line-height: 1.6;">
-                Rezervace v systému slouží jako návrh termínu. Jakmile údaje odešleš nebo zkopíruješ, domluvíme si finální potvrzení času a místa.
+    <!-- TAB 3: Podmínky a čas -->
+    <section class="nabidka-pane" id="pane-podminky">
+        <div class="rezervace-card">
+            <h2>Podmínky a čas</h2>
+            <p>
+                Vybraný termín v objednávkovém systému je návrh schůzky. Po zkopírování nebo odeslání doladíme finální čas i místo.
             </p>
         </div>
     </section>
 </main>
 
 <script>
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    const jumpOrderBtn = document.getElementById('jumpOrderBtn');
+    const taby = document.querySelectorAll('.nabidka-tab');
+    const panely = document.querySelectorAll('.nabidka-pane');
+    const skokBtn = document.getElementById('btnSkokNaRezervaci');
 
-    function setTab(id) {
-        tabBtns.forEach((b) => b.classList.toggle('is-active', b.dataset.pane === id));
-        tabPanes.forEach((p) => p.classList.toggle('is-active', p.id === id));
+    function prepniTab(id) {
+        taby.forEach((t) => t.classList.toggle('active', t.dataset.pane === id));
+        panely.forEach((p) => p.classList.toggle('active', p.id === id));
     }
 
-    tabBtns.forEach((b) => b.addEventListener('click', () => setTab(b.dataset.pane)));
-    jumpOrderBtn.addEventListener('click', () => {
-        setTab('pane-order');
-        document.getElementById('pane-order').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    taby.forEach((t) => t.addEventListener('click', () => prepniTab(t.dataset.pane)));
+    skokBtn.addEventListener('click', () => {
+        prepniTab('pane-objednavka');
+        document.getElementById('pane-objednavka').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    const resDate = document.getElementById('resDate');
-    const resTime = document.getElementById('resTime');
-    const resLength = document.getElementById('resLength');
-    const resLocation = document.getElementById('resLocation');
-    const resName = document.getElementById('resName');
-    const resContact = document.getElementById('resContact');
-    const resDetails = document.getElementById('resDetails');
-    const timePresets = document.querySelectorAll('.preset-chip');
+    const datumRez = document.getElementById('datumRez');
+    const casRez = document.getElementById('casRez');
+    const delkaRez = document.getElementById('delkaRez');
+    const mistoRez = document.getElementById('mistoRez');
+    const jmenoRez = document.getElementById('jmenoRez');
+    const kontaktRez = document.getElementById('kontaktRez');
+    const infoRez = document.getElementById('infoRez');
+    const presety = document.querySelectorAll('.cas-preset');
 
-    const outDate = document.getElementById('outDate');
-    const outTime = document.getElementById('outTime');
-    const outLength = document.getElementById('outLength');
-    const outLocation = document.getElementById('outLocation');
-    const orderFeedback = document.getElementById('orderFeedback');
+    const prehledDatum = document.getElementById('prehledDatum');
+    const prehledCas = document.getElementById('prehledCas');
+    const prehledDelka = document.getElementById('prehledDelka');
+    const prehledMisto = document.getElementById('prehledMisto');
+    const stavRez = document.getElementById('stavRez');
 
-    const now = new Date();
-    const isoToday = now.toISOString().split('T')[0];
-    resDate.min = isoToday;
-    resDate.value = isoToday;
+    const dnes = new Date().toISOString().split('T')[0];
+    datumRez.min = dnes;
+    datumRez.value = dnes;
 
-    function formatCzDate(isoStr) {
-        if (!isoStr) return 'Nevybráno';
-        const parts = isoStr.split('-');
-        if (parts.length !== 3) return isoStr;
-        return `${parts[2]}.${parts[1]}.${parts[0]}`;
+    function formatDatum(val) {
+        if (!val) return 'Dle domluvy';
+        const [r, m, d] = val.split('-');
+        return `${d}.${m}.${r}`;
     }
 
-    function syncPresets(val) {
-        timePresets.forEach((chip) => chip.classList.toggle('is-active', chip.dataset.t === val));
+    function aktualizujPresety(hodnota) {
+        presety.forEach((btn) => btn.classList.toggle('active', btn.dataset.cas === hodnota));
     }
 
-    function renderSummary() {
-        outDate.textContent = formatCzDate(resDate.value);
-        outTime.textContent = resTime.value || 'Dle domluvy';
-        outLength.textContent = resLength.value;
-        outLocation.textContent = resLocation.value.trim() || 'Dle domluvy';
+    function aktualizujPrehled() {
+        prehledDatum.textContent = formatDatum(datumRez.value);
+        prehledCas.textContent = casRez.value || 'Dle domluvy';
+        prehledDelka.textContent = delkaRez.value;
+        prehledMisto.textContent = mistoRez.value.trim() || 'Dle domluvy';
     }
 
-    timePresets.forEach((chip) => {
-        chip.addEventListener('click', () => {
-            resTime.value = chip.dataset.t;
-            syncPresets(chip.dataset.t);
-            renderSummary();
+    presety.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            casRez.value = btn.dataset.cas;
+            aktualizujPresety(btn.dataset.cas);
+            aktualizujPrehled();
         });
     });
 
-    resTime.addEventListener('input', () => {
-        syncPresets(resTime.value);
-        renderSummary();
+    casRez.addEventListener('input', () => {
+        aktualizujPresety(casRez.value);
+        aktualizujPrehled();
     });
 
-    [resDate, resLength, resLocation].forEach((el) => {
-        el.addEventListener('input', renderSummary);
-        el.addEventListener('change', renderSummary);
+    [datumRez, delkaRez, mistoRez].forEach((el) => {
+        el.addEventListener('input', aktualizujPrehled);
+        el.addEventListener('change', aktualizujPrehled);
     });
 
-    function getOrderPayload() {
+    function sestavText() {
         return [
             'Objednávka – Natáčení kamerou DJI',
-            `Datum: ${formatCzDate(resDate.value)}`,
-            `Přesný čas: ${resTime.value || 'neuvedeno'}`,
-            `Délka: ${resLength.value}`,
-            `Lokalita: ${resLocation.value.trim() || 'dle domluvy'}`,
-            `Jméno: ${resName.value.trim() || 'neuvedeno'}`,
-            `Kontakt: ${resContact.value.trim() || 'neuvedeno'}`,
-            `Detaily: ${resDetails.value.trim() || 'bez poznámky'}`
+            `Datum: ${formatDatum(datumRez.value)}`,
+            `Přesný čas: ${casRez.value || 'neuvedeno'}`,
+            `Délka: ${delkaRez.value}`,
+            `Místo: ${mistoRez.value.trim() || 'dle domluvy'}`,
+            `Jméno: ${jmenoRez.value.trim() || 'neuvedeno'}`,
+            `Kontakt: ${kontaktRez.value.trim() || 'neuvedeno'}`,
+            `Doplňující info: ${infoRez.value.trim() || 'bez poznámky'}`
         ].join('\n');
     }
 
-    document.getElementById('btnCopyOrder').addEventListener('click', async () => {
+    document.getElementById('kopirovatRezBtn').addEventListener('click', async () => {
         try {
-            await navigator.clipboard.writeText(getOrderPayload());
-            orderFeedback.textContent = 'Zkopírováno do schránky.';
+            await navigator.clipboard.writeText(sestavText());
+            stavRez.textContent = 'Text zkopírován do schránky.';
         } catch {
-            orderFeedback.textContent = 'Kopírování selhalo.';
+            stavRez.textContent = 'Kopírování se nepodařilo.';
         }
     });
 
-    document.getElementById('btnMailOrder').addEventListener('click', () => {
-        const subj = encodeURIComponent(`Objednávka DJI (${formatCzDate(resDate.value)} ${resTime.value || ''})`);
-        const body = encodeURIComponent(getOrderPayload());
-        window.location.href = `mailto:tvuj-email@domena.cz?subject=${subj}&body=${body}`;
-        orderFeedback.textContent = 'Otevírám e-mailového klienta...';
+    document.getElementById('odeslatRezBtn').addEventListener('click', () => {
+        const subject = encodeURIComponent(`Objednávka DJI (${formatDatum(datumRez.value)} ${casRez.value || ''})`);
+        const body = encodeURIComponent(sestavText());
+        window.location.href = `mailto:tvuj-email@domena.cz?subject=${subject}&body=${body}`;
+        stavRez.textContent = 'Otevírám e-mailového klienta...';
     });
 
-    renderSummary();
+    aktualizujPrehled();
 </script>

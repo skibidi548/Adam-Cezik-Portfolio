@@ -1000,4 +1000,196 @@ body {
     .flap-number {
         font-size: 2rem;
     }
+    /* === NABÍDKA & REZERVACE (sladěno se style.css) === */
+.nabidka-main {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
+    font-family: inherit;
+}
+
+.nabidka-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.nabidka-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.nabidka-tab {
+    background: transparent;
+    color: var(--text-muted, #9ca3af);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nabidka-tab.active {
+    background: var(--accent, #6366f1);
+    border-color: transparent;
+    color: #fff;
+}
+
+.nabidka-btn-primary {
+    background: linear-gradient(90deg, #6366f1, #3b82f6);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nabidka-btn-secondary {
+    background: transparent;
+    color: var(--text-main, #f3f4f6);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nabidka-pane {
+    display: none;
+}
+
+.nabidka-pane.active {
+    display: block;
+}
+
+.rezervace-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.85fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.rezervace-card {
+    background: var(--bg-card, #111827);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.rezervace-card h2,
+.rezervace-card h3 {
+    font-family: inherit;
+    margin-top: 0;
+}
+
+.rezervace-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.rezervace-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rezervace-field label {
+    font-size: 0.85rem;
+    color: var(--text-muted, #9ca3af);
+}
+
+.rezervace-field input,
+.rezervace-field select,
+.rezervace-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--bg-main, #090d16);
+    color: var(--text-main, #f3f4f6);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 0.92rem;
+}
+
+.cas-presety {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cas-preset {
+    background: var(--bg-main, #090d16);
+    color: var(--text-muted, #9ca3af);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+    border-radius: 8px;
+    padding: 6px 11px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.cas-preset.active {
+    background: var(--accent, #6366f1);
+    border-color: transparent;
+    color: #fff;
+}
+
+.prehled-radek {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+    font-size: 0.9rem;
+}
+
+.prehled-radek:last-child {
+    border-bottom: none;
+}
+
+.prehled-radek span {
+    color: var(--text-muted, #9ca3af);
+}
+
+.rezervace-akce {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.rezervace-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.rezervace-info-box {
+    background: var(--bg-main, #090d16);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+    border-radius: 12px;
+    padding: 14px;
+}
+
+@media (max-width: 820px) {
+    .rezervace-grid,
+    .rezervace-row,
+    .rezervace-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
 }
